@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <title>Cyborg - Awesome HTML5 Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="/assets/css/owl.css">
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!--
+
+    TemplateMo 579 Cyborg Gaming
+
+    https://templatemo.com/tm-579-cyborg-gaming
+
+    -->
+</head>
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header Area Start ***** -->
+<div>
+    <th:block th:replace="Home/Home::header"></th:block>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="page-content d-flex justify-content-center align-items-center"
+                 style="background-image: url('https://external-preview.redd.it/5wDg591HinbshFVH0KTtdce5KU9UdVarj5Gc4vynl-w.jpg?auto=webp&s=ee487e02bfd9e7dddeaf0e283378e73ab9b168a8'); background-size: cover; background-position: center;">
+
+                <div class="col-lg-6 mx-auto">
+                    <section class="container mt-1">
+                        <h1 class="mb-4 text-center text-uppercase" style="color: #e75e8d;">Đăng ký</h1>
+                        <form th:action="@{/register}" method="post" th:object="${user}" class="p-4 border rounded shadow-sm bg-light">
+                            <!-- Hiển thị lỗi -->
+                            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger text-start">
+                                <ul>
+                                    <li th:each="error : ${#fields.allErrors()}" th:text="${error.defaultMessage}" class="text-danger"></li>
+                                </ul>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group mb-4">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" required id="email" th:field="*{email}" placeholder="Nhập email">
+                            </div>
+
+                            <!-- Họ và tên và Tên tài khoản cùng 1 hàng -->
+                            <div class="row mb-4">
+                                <div class="col-lg-6">
+                                    <label for="username" class="form-label">Tài khoản</label>
+                                    <input type="text" class="form-control" required id="username" th:field="*{username}" placeholder="Nhập tài khoản">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="fullName" class="form-label">Họ và tên</label>
+                                    <input type="text" class="form-control" required id="fullName" th:field="*{fullName}" placeholder="Nhập họ và tên">
+                                </div>
+                            </div>
+
+                            <!-- Mật khẩu và Xác nhận mật khẩu cùng 1 hàng -->
+                            <div class="row mb-4">
+                                <div class="col-lg-6 position-relative">
+                                    <label for="password" class="form-label">Mật khẩu</label>
+                                    <input type="password" class="form-control" required id="password" th:field="*{password}" placeholder="Nhập mật khẩu" style="padding-right: 40px;">
+                                    <i id="togglePassword" class="fa fa-eye position-absolute" style="top: 75%; right: 20px; transform: translateY(-50%); cursor: pointer; color: #6c757d;"></i>
+                                </div>
+                                <div class="col-lg-6 position-relative">
+                                    <label for="confirmPassword" class="form-label">Xác nhận mật khẩu</label>
+                                    <input type="password" class="form-control" required id="confirmPassword" th:field="*{confirmPassword}" placeholder="Nhập mật khẩu xác nhận" style="padding-right: 40px;">
+                                    <i id="toggleConfirmPassword" class="fa fa-eye position-absolute" style="top: 75%; right: 20px; transform: translateY(-50%); cursor: pointer; color: #6c757d;"></i>
+                                </div>
+                            </div>
+
+                            <!-- Nút đăng ký -->
+                            <div class="d-grid mb-3">
+                                <button type="submit" class="btn text-white" style="background-color: #e75e8d;">Đăng ký</button>
+                            </div>
+
+                            <!-- Đường dẫn đăng nhập -->
+                            <p class="text-center mb-4">Bạn đã có tài khoản?
+                                <a th:href="@{/login}" style="color: #e75e8d; text-decoration: none;">Đăng nhập</a>
+                            </p>
+
+                            <!-- OAuth Đăng ký -->
+                            <div class="text-center">
+                                <a href="/oauth2/authorization/google" class="text-danger me-3" style="font-size: 25px;" data-mdb-ripple-init>
+                                    <i class="fab fa-google"></i>
+                                </a>
+                                <a href="/oauth2/authorization/facebook" class="text-primary" style="font-size: 25px;" data-mdb-ripple-init>
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <th:block th:replace="Home/Home::footer"></th:block>
+</div>
+<script>
+    // Toggle mật khẩu
+document.getElementById('togglePassword').addEventListener('click', function () {
+    const passwordInput = document.getElementById('password');
+    const icon = this;
+
+    // Toggle giữa type 'password' và 'text'
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+});
+
+// Toggle mật khẩu xác nhận
+document.getElementById('toggleConfirmPassword').addEventListener('click', function () {
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const icon = this;
+
+    // Toggle giữa type 'password' và 'text'
+    if (confirmPasswordInput.type === 'password') {
+        confirmPasswordInput.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        confirmPasswordInput.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+});
+
+</script>
+<!-- Scripts -->
+<!-- Bootstrap core JavaScript -->
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="/assets/js/isotope.min.js"></script>
+<script src="/assets/js/owl-carousel.js"></script>
+<script src="/assets/js/tabs.js"></script>
+<script src="/assets/js/popup.js"></script>
+<script src="/assets/js/custom.js"></script>
+
+</body>
+</html>

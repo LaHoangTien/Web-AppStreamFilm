@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <title>Modernize Free</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png"/>
+    <link rel="stylesheet" href="/assets/css/styles.min.css"/>
+</head>
+<body>
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+    <div>
+        <th:block th:replace="Admin/management::aside"></th:block>
+    </div>
+    <div class="body-wrapper">
+        <div>
+            <th:block th:replace="Admin/management::header"></th:block>
+        </div>
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-12">
+                            <h1 class="mb-4">Danh Sách Banners Quảng Cáo</h1>
+                        </div>
+                        <a href="/banners/add" class="btn btn-success mb-3">Thêm Banner</a>
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>Tên</th>
+                                <th>Vị trí</th>
+                                <th>Hình ảnh</th>
+                                <th>URL</th>
+                                <th>Hoạt động</th>
+                                <th>Hành động</th>
+                            </tr>
+                            </thead>
+                            <tbody id="actorTable">
+                            <tr th:each="banner : ${banners}">
+                                <td th:text="${banner.name}"></td>
+                                <td th:text="${banner.position}"></td>
+                                <td><img th:src="${banner.imageUrl}" alt="Banner" style="width: 100px;"></td>
+                                <td><a th:href="${banner.redirectUrl}" target="_blank"
+                                       th:text="${banner.redirectUrl}"></a></td>
+                                <td>
+                                    <input type="checkbox"
+                                           th:checked="${banner.isActive}"
+                                           th:onclick="'toggleActive(' + ${banner.id} + ')'"
+                                           class="form-check-input">
+                                </td>
+                                <td>
+                                    <a th:href="@{/banners/edit/{id}(id=${banner.id})}">Sửa</a> |
+                                    <a th:href="@{/banners/delete/{id}(id=${banner.id})}"
+                                       onclick="return confirm('Bạn có chắc chắn xóa không?')">Xóa</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function toggleActive(bannerId) {
+        fetch(`/banners/toggle-active/${bannerId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="_csrf"]').getAttribute('content') // Nếu sử dụng CSRF Token
+            }
+        })
+        .catch(error => {
+            console.error("Lỗi:", error);
+        });
+    }
+</script>
+
+<script src="/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/sidebarmenu.js"></script>
+<script src="/assets/js/app.min.js"></script>
+<script src="/assets/libs/simplebar/dist/simplebar.js"></script>
+</body>
+</html>

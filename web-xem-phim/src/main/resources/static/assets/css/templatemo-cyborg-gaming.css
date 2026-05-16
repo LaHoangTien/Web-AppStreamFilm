@@ -1,0 +1,2303 @@
+/*
+
+TemplateMo 579 Cyborg Gaming
+
+https://templatemo.com/tm-579-cyborg-gaming
+
+*/
+
+/* ---------------------------------------------
+Table of contents
+------------------------------------------------
+01. font & reset css
+02. reset
+03. global styles
+04. header
+05. banner
+06. features
+07. testimonials
+08. contact
+09. footer
+
+--------------------------------------------- */
+/* 
+---------------------------------------------
+font & reset css
+--------------------------------------------- 
+*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900");
+/* 
+---------------------------------------------
+reset
+--------------------------------------------- 
+*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, div
+pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q,
+s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
+figure, header, nav, section, article, aside, footer, figcaption {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clearfix {
+  display: inline-block;
+}
+
+html[xmlns] .clearfix {
+  display: block;
+}
+
+* html .clearfix {
+  height: 1%;
+}
+
+ul, li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+header, nav, section, article, aside, footer, hgroup {
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  background-color: #1e1e1e;
+  font-size: 16px;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+	color: #CCC;
+  text-decoration: none !important;
+}
+a:hover {
+	color: #F99;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: #fff;
+  font-weight: 700;
+}
+
+ul {
+  margin-bottom: 0px;
+}
+
+p {
+  font-size: 15px;
+  line-height: 30px;
+  color: #fff;
+}
+
+img {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* 
+---------------------------------------------
+Global Styles
+--------------------------------------------- 
+*/
+html,
+body {
+  background: #1f2122;
+  font-family: 'Poppins', sans-serif;
+}
+
+body .page-content {
+  margin-top: 110px;
+  background-color: #27292a;
+  padding-top: 16px;
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-bottom: 60px;
+  border-radius: 23px;
+}
+
+p {
+  font-size: 15px;
+  color: #666;
+  line-height: 30px;
+  margin-bottom: 0px;
+}
+
+::selection {
+  background: #e75e8d;
+  color: #fff;
+}
+
+::-moz-selection {
+  background: #e75e8d;
+  color: #fff;
+}
+
+.templatemo-item {
+	max-width: 80px; 
+	border-radius: 23px;
+}
+
+.main-button a {
+  font-size: 14px;
+  color: #fff;
+  background-color: #e75e8d;
+  padding: 12px 30px;
+  display: inline-block;
+  border-radius: 25px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+}
+.item {
+    position: relative; /* Để có thể đặt vị trí cho nút xóa */
+    transition: transform 0.3s; /* Hiệu ứng chuyển động khi hover */
+}
+
+.item:hover {
+    transform: scale(1.05); /* Phóng to một chút khi hover */
+}
+
+.poster-container {
+    position: relative; /* Để nút xóa được định vị bên trong */
+}
+
+.remove-form {
+    position: absolute; /* Đặt vị trí của nút xóa */
+    top: 5px;           /* Khoảng cách từ trên xuống */
+    right: 5px;        /* Khoảng cách từ bên phải */
+    display: none;     /* Ẩn nút xóa mặc định */
+}
+
+.item:hover .remove-form {
+    display: block;    /* Hiển thị nút xóa khi hover vào thẻ phim */
+}
+
+.remove-button {
+    background-color: #e75e8d; /* Màu nền đỏ */
+    color: white;          /* Màu chữ trắng */
+    border: none;          /* Bỏ đường viền */
+    border-radius: 50%;    /* Tạo thành hình tròn */
+    width: 30px;           /* Chiều rộng của nút */
+    height: 30px;          /* Chiều cao của nút */
+    font-size: 16px;       /* Kích thước chữ */
+    cursor: pointer;       /* Hiển thị con trỏ chuột khi hover */
+    display: flex;         /* Sử dụng flexbox để căn giữa */
+    align-items: center;   /* Căn giữa theo chiều dọc */
+    justify-content: center;/* Căn giữa theo chiều ngang */
+}
+
+.remove-button:hover {
+    background-color: #8a3854; /* Đổi màu khi hover */
+}
+
+.main-button button {
+  font-size: 14px;
+  color: #fff;
+  background-color: #e75e8d;
+  padding: 12px 30px;
+  display: inline-block;
+  border-radius: 25px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+}
+.main-button a:hover {
+  background-color: #fff;
+  color: #e75e8d;
+}
+
+.button button {
+  color: #fff;
+  background-color: #e75e8d;
+  padding: 8px;
+  display: inline-block;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.button button:hover {
+  background-color: #fff;
+  color: #e75e8d;
+}
+.main-border-button a {
+  font-size: 14px;
+  color: #ec6090;
+  background-color: transparent;
+  border: 1px solid #ec6090;
+  padding: 12px 30px;
+  display: inline-block;
+  border-radius: 25px;
+  font-weight: 400;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.main-border-button a:hover {
+  border-color: #fff;
+  background-color: #fff;
+  color: #e75e8d;
+}
+
+.border-no-active a {
+  border-color: #666;
+  color: #666;
+}
+
+.border-no-active a:hover{
+  border-color: #666;
+  color: #666;
+  background-color: transparent;
+}
+
+section {
+  margin-top: 120px;
+}
+
+.heading-section h4 {
+  color: #ec6090;
+  font-size: 34px;
+  text-decoration: none;
+  margin-bottom: 30px;
+}
+
+.heading-section h4 em {
+  color: #fff;
+  font-style: normal;
+  text-decoration: underline;
+}
+
+/* 
+---------------------------------------------
+Pre-loader Style
+--------------------------------------------- 
+*/
+
+.js-preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.99);
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  opacity: 1;
+  visibility: visible;
+  z-index: 9999;
+  -webkit-transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease;
+}
+
+.js-preloader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@-webkit-keyframes dot {
+  50% {
+      -webkit-transform: translateX(96px);
+      transform: translateX(96px);
+  }
+}
+
+@keyframes dot {
+  50% {
+      -webkit-transform: translateX(96px);
+      transform: translateX(96px);
+  }
+}
+
+@-webkit-keyframes dots {
+  50% {
+      -webkit-transform: translateX(-31px);
+      transform: translateX(-31px);
+  }
+}
+
+@keyframes dots {
+  50% {
+      -webkit-transform: translateX(-31px);
+      transform: translateX(-31px);
+  }
+}
+
+.preloader-inner {
+  position: relative;
+  width: 142px;
+  height: 40px;
+  background: transparent;
+}
+
+.preloader-inner .dot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 12px;
+  left: 15px;
+  background: #e75e8d;
+  border-radius: 50%;
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  -webkit-animation: dot 2.8s infinite;
+  animation: dot 2.8s infinite;
+}
+
+.preloader-inner .dots {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  margin-top: 12px;
+  margin-left: 31px;
+  -webkit-animation: dots 2.8s infinite;
+  animation: dots 2.8s infinite;
+}
+
+.preloader-inner .dots span {
+  display: block;
+  float: left;
+  width: 16px;
+  height: 16px;
+  margin-left: 16px;
+  background: #e75e8d;
+  border-radius: 50%;
+}
+
+
+
+/* 
+---------------------------------------------
+Header Style
+--------------------------------------------- 
+*/
+
+.background-header {
+  background-color: #fff !important;
+  height: 70px!important;
+  position: fixed!important;
+  top: 0!important;
+  left: 0;
+  right: 0;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.15)!important;
+  -webkit-transition: all .5s ease 0s;
+  -moz-transition: all .5s ease 0s;
+  -o-transition: all .5s ease 0s;
+  transition: all .5s ease 0s;
+  display: none;
+}
+
+.header-area {
+  background-color: transparent;
+  position: absolute;
+  height: 70px;
+  top: 15px;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  -webkit-transition: all .5s ease 0s;
+  -moz-transition: all .5s ease 0s;
+  -o-transition: all .5s ease 0s;
+  transition: all .5s ease 0s;
+}
+
+.header-area .main-nav {
+  min-height: 80px;
+  background: transparent;
+  display: flex;
+  padding: 15px 0px;
+  border-radius: 50px;
+}
+
+.background-header .main-nav {
+  padding: 0px;
+  background-color: transparent;
+}
+
+.header-area .main-nav #search {
+  position: relative;
+}
+
+.header-area .main-nav #search input {
+  background-color: #27292a;
+  height: 46px;
+  border-radius: 23px;
+  border: none;
+  color: #666;
+  font-size: 14px;
+  padding: 0px 15px 0px 45px;
+}
+
+.header-area .main-nav #search i {
+  position: absolute;
+  color: #666;
+  left: 20px;
+  top: 16px;
+  width: 18px;
+  height: 18px;
+  font-size: 16px;
+}
+
+.header-area .main-nav .logo {
+  border-right: 1px solid #27292a;
+  flex-basis: 25%;
+  margin-right: 5%;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.header-area .main-nav .logo img {
+  width: 191px;
+}
+
+.background-header .main-nav .logo {
+  margin-top: 8px;
+}
+
+.background-header .main-nav .logo img {
+  width: 180px;
+}
+
+.header-area .main-nav .nav {
+  display: inline-flex;
+  flex-basis: 70%;
+  justify-content: flex-end;
+  vertical-align: middle;
+  text-align: right;
+  margin-top: 0px;
+  margin-right: 0px;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  position: relative;
+  z-index: 999;
+}
+
+.header-area .main-nav .nav li {
+  padding-left: 10px;
+  padding-right: 10px;
+  display: inline-block;
+}
+
+.header-area .main-nav .nav li a {
+  display: block;
+  font-weight: 400;
+  font-size: 14px;
+  text-transform: capitalize;
+  color: #666;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  border: transparent;
+  padding: 13px 10px;
+  border-radius: 18px;
+  letter-spacing: .3px;
+}
+
+.header-area .main-nav .nav li.last-child a {
+  background-color: #27292a;
+  padding: 8px 10px 8px 20px;
+  border-radius: 23px;
+  height: 45px;
+  text-align: center;
+}
+
+.header-area .main-nav .nav li.last-child a img {
+  max-width: 30px;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+
+.header-area .main-nav .nav li.has-sub ul.sub-menu li.last-child a:hover,
+.background-header .main-nav .nav li.has-sub ul.sub-menu li:last-child a:hover {
+  padding-left: 25px !important;
+}
+
+.header-area .main-nav .nav li:hover a,
+.header-area .main-nav .nav li a.active {
+  color: #e75e8d !important;
+}
+
+.header-area .main-nav .nav li.last-child:hover a,
+.header-area .main-nav .nav li.last-child a.active {
+  color: #fff !important;
+  background-color: #e75e8d !important;
+}
+
+.background-header .main-nav .nav li:hover a,
+.background-header .main-nav .nav li a.active {
+  color: #fff;
+  opacity: 1;
+}
+
+.header-area .main-nav .nav li.has-sub {
+  position: relative;
+  padding-right: 15px;
+}
+
+.header-area .main-nav .menu-trigger {
+  cursor: pointer;
+  display: block;
+  position: absolute;
+  top: 23px;
+  width: 32px;
+  height: 40px;
+  text-indent: -9999em;
+  z-index: 99;
+  right: 20px;
+  display: none;
+}
+
+.background-header .main-nav .menu-trigger {
+  top: 17px;
+}
+
+.header-area .main-nav .menu-trigger span,
+.header-area .main-nav .menu-trigger span:before,
+.header-area .main-nav .menu-trigger span:after {
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  background-color: #e75e8d;
+  display: block;
+  position: absolute;
+  width: 30px;
+  height: 2px;
+  left: 0;
+}
+
+.background-header .main-nav .menu-trigger span,
+.background-header .main-nav .menu-trigger span:before,
+.background-header .main-nav .menu-trigger span:after {
+  background-color: #e75e8d;
+}
+
+.header-area .main-nav .menu-trigger span:before,
+.header-area .main-nav .menu-trigger span:after {
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  background-color: #e75e8d;
+  display: block;
+  position: absolute;
+  width: 30px;
+  height: 2px;
+  left: 0;
+  width: 75%;
+}
+
+.background-header .main-nav .menu-trigger span:before,
+.background-header .main-nav .menu-trigger span:after {
+  background-color: #e75e8d;
+}
+
+.header-area .main-nav .menu-trigger span:before,
+.header-area .main-nav .menu-trigger span:after {
+  content: "";
+}
+
+.header-area .main-nav .menu-trigger span {
+  top: 16px;
+}
+
+.header-area .main-nav .menu-trigger span:before {
+  -moz-transform-origin: 33% 100%;
+  -ms-transform-origin: 33% 100%;
+  -webkit-transform-origin: 33% 100%;
+  transform-origin: 33% 100%;
+  top: -10px;
+  z-index: 10;
+}
+
+.header-area .main-nav .menu-trigger span:after {
+  -moz-transform-origin: 33% 0;
+  -ms-transform-origin: 33% 0;
+  -webkit-transform-origin: 33% 0;
+  transform-origin: 33% 0;
+  top: 10px;
+}
+
+.header-area .main-nav .menu-trigger.active span,
+.header-area .main-nav .menu-trigger.active span:before,
+.header-area .main-nav .menu-trigger.active span:after {
+  background-color: transparent;
+  width: 100%;
+}
+
+.header-area .main-nav .menu-trigger.active span:before {
+  -moz-transform: translateY(6px) translateX(1px) rotate(45deg);
+  -ms-transform: translateY(6px) translateX(1px) rotate(45deg);
+  -webkit-transform: translateY(6px) translateX(1px) rotate(45deg);
+  transform: translateY(6px) translateX(1px) rotate(45deg);
+  background-color: #e75e8d;
+}
+
+.background-header .main-nav .menu-trigger.active span:before {
+  background-color: #e75e8d;
+}
+
+.header-area .main-nav .menu-trigger.active span:after {
+  -moz-transform: translateY(-6px) translateX(1px) rotate(-45deg);
+  -ms-transform: translateY(-6px) translateX(1px) rotate(-45deg);
+  -webkit-transform: translateY(-6px) translateX(1px) rotate(-45deg);
+  transform: translateY(-6px) translateX(1px) rotate(-45deg);
+  background-color: #e75e8d;
+}
+
+.background-header .main-nav .menu-trigger.active span:after {
+  background-color: #e75e8d;
+}
+
+.header-area.header-sticky {
+  min-height: 70px;
+}
+
+.header-area.header-sticky .nav li a.active {
+  color: #fff;
+}
+
+@media (max-width: 1200px) {
+  .header-area .main-nav .nav li {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .header-area .main-nav:before {
+    display: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .header-area {
+    top: 0;
+  }
+  .header-area .main-nav {
+    background-color: transparent;
+    border-radius: 0px;
+  }
+  .header-area .main-nav .nav {
+    height: auto;
+    flex-basis: 100%;
+  }
+  .header-area .main-nav .logo {
+    position: absolute;
+    left: 30px;
+    top: 15px;
+  }
+  .background-header .main-nav .logo {
+    top: 0px;
+  }
+  .background-header .main-nav .border-button {
+    top: 0px !important;
+  }
+  .header-area .main-nav .border-button {
+    position: absolute;
+    top: 15px;
+    right: 70px;
+  }
+  .header-area.header-sticky .nav li a:hover,
+  .header-area.header-sticky .nav li a.active {
+    color: #e75e8d!important;
+    opacity: 1;
+  }
+  .header-area.header-sticky .nav li.search-icon a {
+    width: 100%;
+  }
+  .header-area {
+    background-color: #f7f7f7;
+    padding: 0px 15px;
+    height: 80px;
+    box-shadow: none;
+    text-align: center;
+  }
+  .header-area .container {
+    padding: 0px;
+  }
+  .header-area .logo {
+    margin-left: 0px;
+  }
+  .header-area .menu-trigger {
+    display: block !important;
+  }
+  .header-area .main-nav {
+    overflow: hidden;
+  }
+  .header-area .main-nav .nav {
+    float: none;
+    width: 100%;
+    display: none;
+    -webkit-transition: all 0s ease 0s;
+    -moz-transition: all 0s ease 0s;
+    -o-transition: all 0s ease 0s;
+    transition: all 0s ease 0s;
+    margin-left: 0px;
+  }
+  .header-area.header-sticky .nav {
+    margin-top: 65px !important;
+    text-align: center;
+  }
+  .background-header.header-sticky .nav {
+    margin-top: 70px !important;
+  }
+  .header-area .main-nav .nav li:first-child {
+    border-top: 1px solid #eee;
+  }
+  .header-area .main-nav .nav li {
+    width: 100%;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+  .header-area .main-nav .nav li a {
+    height: 50px !important;
+    line-height: 50px !important;
+    padding: 0px !important;
+    border: none !important;
+    background: #fff !important;
+    color: #1e1e1e !important;
+  }
+  .header-area .main-nav .nav li a:hover {
+    background: #fff !important;
+    color: #e75e8d!important;
+  }
+  .header-area .main-nav .nav li:last-child a img {
+    display: none;
+  }
+  .header-area .main-nav .nav li:last-child a:hover {
+    color: #ec6090 !important;
+    background-color: transparent !important;
+  }
+  .header-area .main-nav .nav li.has-sub ul.sub-menu {
+    position: relative;
+    visibility: inherit;
+    opacity: 1;
+    z-index: 1;
+    transform: translateY(0%);
+    top: 0px;
+    width: 100%;
+    box-shadow: none;
+    height: 0px;
+    transition: all 0s;
+  }
+  .header-area .main-nav .nav li.submenu ul li a {
+    font-size: 12px;
+    font-weight: 400;
+  }
+  .header-area .main-nav .nav li.submenu ul li a:hover:before {
+    width: 0px;
+  }
+  .header-area .main-nav .nav li.has-sub ul.sub-menu {
+    height: auto;
+  }
+  .header-area .main-nav .nav li.has-sub:after {
+    color: #3B566E;
+    right: 30px;
+    font-size: 14px;
+    top: 15px;
+  }
+  .header-area .main-nav .nav li.submenu:hover ul, .header-area .main-nav .nav li.submenu:focus ul {
+    height: 0px;
+  }
+}
+
+/* 
+---------------------------------------------
+Banner Style
+--------------------------------------------- 
+*/
+
+.main-banner {
+
+  background-position: center center;
+  background-size: cover;
+  min-height: 380px;
+  border-radius: 23px;
+  padding: 80px 60px;
+}
+
+
+
+/* 
+---------------------------------------------
+Most Popular Style
+--------------------------------------------- 
+*/
+
+.most-popular {
+  margin-top: 60px;
+  padding: 30px;
+  background-color: #1f2122;
+  border-radius: 23px;
+}
+
+.most-popular .col-lg-3 {
+  display: flex;
+  justify-content: center; /* Căn giữa từng col */
+}
+
+.most-popular .item {
+  max-width: 240px; /* Chiều rộng tối đa */
+  background-color: #27292a;
+  padding: 15px;
+  border-radius: 23px;
+  margin-bottom: 30px;
+  text-align: center; /* Căn giữa nội dung trong item */
+  box-sizing: border-box;
+}
+.most-popular .item img {
+  border-radius: 23px;
+}
+
+.most-popular .item h4 {
+  font-size: 15px;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+.most-popular .item span {
+  color: #666;
+  margin-top: 7px;
+}
+
+
+.most-popular .main-button {
+  text-align: center;
+  margin-bottom: -53px;
+}
+
+/* 
+---------------------------------------------
+Gaming Library Style
+--------------------------------------------- 
+*/
+
+.gaming-library {
+  margin-top: 60px;
+  padding: 30px;
+  background-color: #1f2122;
+  border-radius: 23px;
+}
+
+.gaming-library .item {
+  border-bottom: 1px solid #27292a;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.gaming-library .last-item {
+  margin-bottom: 30px;
+}
+
+.profile-library .last-item {
+  border-bottom: none;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.gaming-library .item ul li {
+  margin-top: 15px;
+}
+
+.gaming-library .item ul li img {
+  margin-top: -30px;
+}
+
+.gaming-library .item ul li {
+  display: inline-block;
+  width: 17%;
+}
+
+.gaming-library .item ul li:first-child {
+  width: 110px;
+}
+
+.gaming-library .item ul li:last-child {
+  width: 15%;
+  text-align: right;
+}
+
+.gaming-library .item ul li h4 {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.gaming-library .item ul li span {
+  color: #666;
+  font-size: 14px;
+}
+
+.gaming-library .main-button {
+  text-align: center;
+  margin-bottom: -53px;
+}
+
+/* 
+---------------------------------------------
+Footer Style
+--------------------------------------------- 
+*/
+
+footer p {
+  text-align: center;
+  padding: 30px 0px;
+  color: #fff;
+  font-weight: 300;
+}
+
+footer p a {
+  color: #fff;
+  transition: all .3s;
+}
+
+footer p a:hover {
+  color: #ec6090;
+}
+
+/* 
+---------------------------------------------
+Featured Games Style
+--------------------------------------------- 
+*/
+
+.featured-games {
+  border-radius: 23px;
+  background-color: #1f2122;
+  padding: 30px;
+}
+
+
+
+.featured-games .item .thumb .hover-effect {
+  position: absolute;
+  bottom: -100px;
+  text-align: center;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .4s;
+  margin-bottom: 100px;
+}
+
+.featured-games .item .thumb:hover .hover-effect {
+
+  visibility: visible;
+  bottom: 15px;
+  opacity: 1 !important; /* Giữ độ trong suốt của .status không thay đổi */
+  pointer-events: none; /* Ngăn không cho nhận sự kiện hover */
+}
+
+.featured-games .item .thumb .hover-effect h6 {
+  background-color: rgba(31,33,34,0.95);
+  display: inline-block;
+  color: #ec6090;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 25px;
+}
+
+.featured-games .item img {
+  border-radius: 23px;
+}
+
+.featured-games .item h4 {
+   font-size: 0.9em;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  text-align: center; /* Căn giữa văn bản */
+     width: 200px; /* Chiều dài tối đa */
+      white-space: nowrap; /* Ngăn không cho dòng xuống dòng */
+      overflow: hidden; /* Ẩn phần văn bản vượt quá */
+      text-overflow: ellipsis; /* Hiển thị 3 chấm nếu văn bản bị cắt */
+
+}
+
+.featured-games .item span {
+ font-size: 0.6em;
+  color: #666;
+  display: block;
+  margin-top: 7px;
+  font-weight: 400;
+  text-align: center; /* Căn giữa văn bản */
+  overflow: hidden; /* Ẩn phần văn bản vượt quá */
+  text-overflow: ellipsis; /* Hiển thị 3 chấm nếu văn bản bị cắt */
+}
+
+.featured-games .item ul {
+  float: right;
+  margin-top: 20px;
+}
+
+.featured-games .item ul li {
+  text-align: right;
+  color: #fff;
+  font-size: 14px;
+}
+
+.featured-games .item ul li:first-child i {
+  color: yellow;
+}
+
+.featured-games .item ul li:last-child i {
+  color: #ec6090;
+}
+
+.featured-games .owl-nav {
+  position: absolute;
+  margin: 0 auto;
+  top: -70px;
+  right: 0;
+}
+
+.featured-games .owl-nav .owl-prev {
+  margin-right: 2.5px;
+}
+
+.featured-games .owl-nav .owl-next {
+  margin-left: 2.5px;
+}
+
+.featured-games .owl-nav .owl-prev span,
+.featured-games .owl-nav .owl-next span  {
+  font-size: 36px;
+  display: inline-block;
+  color: #666;
+  opacity: 1;
+  transition: all .3s;
+}
+
+.featured-games .owl-nav .owl-prev span:hover,
+.featured-games .owl-nav .owl-next span:hover {
+  opacity: 1;
+  color: #ec6090;
+}
+
+.top-downloaded {
+  border-radius: 23px;
+  background-color: #1f2122;
+  padding: 30px;
+  max-height: 567px;
+  min-height: 567px;
+}
+
+.top-downloaded ul li {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.top-downloaded ul li img {
+  float: left;
+  margin-right: 15px;
+}
+
+.top-downloaded ul li h4 {
+  font-size: 15px;
+  padding-top: 7px;
+}
+
+.top-downloaded ul li h6 {
+  font-size: 15px;
+  color: #666;
+  font-weight: 400;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.top-downloaded ul li span {
+  color: #fff;
+  font-size: 15px;
+  margin-right: 10px;
+}
+
+.top-downloaded ul li .download i {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-23px);
+  width: 46px;
+  height: 46px;
+  text-align: center;
+  line-height: 46px;
+  color: #ec6090;
+  background-color: #27292a;
+  border-radius: 50%;
+}
+
+.top-downloaded ul li {
+  border-bottom: 1px solid #27292a;
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+}
+
+.top-downloaded .text-button  {
+  text-align: center;
+}
+
+.top-downloaded .text-button a {
+  font-weight: 600;
+  color: #ec6090;
+  font-size: 15px;
+}
+
+/* 
+---------------------------------------------
+Start Stream Style
+--------------------------------------------- 
+*/
+
+.start-stream .heading-section {
+  margin-top: 60px;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.start-stream .item {
+  padding: 30px;
+  border: 1px solid #444;
+  border-radius: 23px;
+}
+
+.start-stream .item h4 {
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.start-stream .main-button {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* 
+---------------------------------------------
+Live Stream Style
+--------------------------------------------- 
+*/
+
+.live-stream {
+  margin-top: 60px;
+  border-radius: 23px;
+  background-color: #1f2122;
+  padding: 30px;
+}
+
+.live-stream .item {
+  margin-bottom: 30px;
+}
+
+.live-stream .thumb {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.live-stream .thumb img {
+  border-radius: 23px; 
+}
+
+.live-stream .thumb:hover .hover-effect {
+  opacity: 1;
+  visibility: visible;
+}
+
+.live-stream .hover-effect {
+  opacity: 0;
+  visibility: hidden;
+  transition: all .4s;
+}
+
+.live-stream .hover-effect .live a { 
+  position: absolute;
+  background-color: rgba(236, 96, 144, 0.9);
+  padding: 5px 10px;
+  border-radius: 23px;
+  color: #fff;
+  font-size: 14px;
+  right: 15px;
+  top: 15px;
+}
+
+.live-stream .hover-effect ul {
+  position: absolute;
+  bottom: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.live-stream .hover-effect ul li {
+  display: inline-block;
+  margin: 0px 5px;
+}
+
+.live-stream .hover-effect ul li a {
+  background-color: rgba(236, 96, 144, 0.9);
+  padding: 5px 10px;
+  border-radius: 23px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.live-stream .avatar img {
+  margin-right: 15px;
+}
+
+.live-stream span i {
+  color: #fff;
+  background-color: #ec6090;
+  border-radius: 50%;
+  font-size: 12px;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  text-align: center;
+  line-height: 20px;
+  margin-right: 3px;
+}
+
+.live-stream span {
+  font-size: 14px;
+  color: #ec6090;
+}
+
+.live-stream .down-content h4 {
+  margin-top: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 61px;
+}
+
+.live-stream .main-button {
+  text-align: center;
+  margin-bottom: -53px;
+}
+
+/* 
+---------------------------------------------
+Featured Banner Style
+--------------------------------------------- 
+*/
+
+.feature-banner .thumb {
+  position: relative;
+  max-height: 305px;
+  overflow: hidden;
+  border-radius: 23px;;
+}
+
+.feature-banner .thumb a {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-23px, -23px);
+  width: 46px;
+  height: 46px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+  line-height: 46px;
+  color: #ec6090;
+}
+
+/* 
+---------------------------------------------
+Game Details Style
+--------------------------------------------- 
+*/
+
+.game-details h2 {
+  font-size: 45px;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 60px 0px;
+}
+
+.game-details .content {
+  border-radius: 23px;
+  padding: 30px;
+  background-color: #1f2122;
+}
+
+.game-details .content .left-info {
+  background-color: #27292a;
+  border-radius: 23px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+
+
+.game-details .content .left-info p {
+  color: white;
+}
+
+.game-details .content .left-info span {
+  color: #b3b3b3;
+}
+
+.game-details .content .left-info ul {
+  text-align: right;
+}
+
+.game-details .content .left-info ul li {
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.game-details .content .left-info ul li:first-child i {
+  color: yellow;
+}
+
+.game-details .content .left-info ul li:last-child i {
+  color: #ec6090;
+}
+
+.game-details .content .right-info {
+  background-color: #27292a;
+  border-radius: 23px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+.game-details .content .right-info ul li {
+    display: inline-block;
+    width: auto; /* Sửa thành 'auto' để phù hợp với nội dung */
+    text-align: center;
+    font-size: 14px;
+    color: #b3b3b3;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Đặt màu chữ luôn là trắng và nền hồng khi nút được kích hoạt */
+.nav-tabs .nav-link {
+    color: white !important;
+    border: none !important; /* Bỏ viền trắng */
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #e75e8d !important; /* Màu nền hồng khi kích hoạt */
+    color: white !important; /* Màu chữ trắng */
+     border: none !important; /* Bỏ viền trắng */
+}
+
+/* Thay đổi màu nền khi rê chuột qua */
+.nav-tabs .nav-link:hover {
+    background-color: #ffb3d9; /* Màu nền hồng nhạt khi rê chuột qua */
+    color: white !important;
+    border: none !important; /* Bỏ viền trắng */
+}
+
+
+.dropdown-menu {
+    display: none; /* Ẩn menu dropdown ban đầu */
+    position: absolute;
+    background-color: #333;
+    border: 1px solid #444;
+    margin-top: 10px;
+    list-style-type: none;
+    padding: 0;
+    z-index: 1000;
+}
+
+.dropdown-menu.show {
+    display: block; /* Hiện menu dropdown khi lớp show được thêm vào */
+}
+
+.dropdown-menu li {
+    width: 200px; /* Độ rộng của menu dropdown */
+}
+
+.dropdown-item {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+}
+
+.dropdown-item:hover {
+    background-color: #575757;
+}
+
+.game-details .content .right-info ul li i {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.game-details .content .right-info ul li span {
+  color: b3b3b3;
+} 
+
+.game-details .content .right-info ul li p {
+  color: white;
+}
+
+.game-details .main-border-button {
+  margin-top: 35px;
+}
+
+.game-details .main-border-button a {
+  text-align: center;
+  width: 100%;
+} 
+
+/* 
+---------------------------------------------
+Other Related Style
+--------------------------------------------- 
+*/
+
+.other-games {
+  border-radius: 23px;
+  padding: 30px 30px 0px 30px;
+  background-color: #1f2122;
+  margin-top: 60px;
+}
+
+.other-games .item {
+  position: relative;
+  border-bottom: 1px solid #27292a;
+  padding-bottom: 52px;
+  margin-bottom: 30px;
+}
+
+.other-games .item img {
+  float: left;
+  margin-right: 15px;
+}
+
+.other-games .item h4 {
+  display: inline-block;
+  font-size: 15px;
+  margin-bottom: 5px;
+  padding-top: 15px;
+}
+
+.other-games .item span {
+  color: #666;
+  font-size: 14px;
+  display: block;
+}
+
+.other-games ul {
+  position: absolute;
+  right: 0;
+  top: 15px;
+}
+
+.other-games ul li {
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.other-games ul li:first-child i {
+  color: yellow;
+}
+
+.other-games ul li:last-child i {
+  color: #ec6090;
+}
+
+/* 
+---------------------------------------------
+Top Streamers Style
+--------------------------------------------- 
+*/
+
+.top-streamers {
+  border-radius: 23px;
+  background-color: #1f2122;
+  padding: 30px;
+  max-height: 567px;
+  min-height: 567px;
+}
+
+.top-streamers ul li {
+  display: inline-block;
+  width: 100%;
+  border-bottom: 1px solid #353637;
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+}
+
+.top-streamers ul li:last-child {
+  border-bottom: none;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.top-streamers ul li span {
+  float: left;
+  font-size: 15px;
+  color: #fff;
+  font-weight: 700;
+  padding-top: 12px;
+  margin-right: 10px;
+}
+
+.top-streamers ul li h6 {
+  display: inline;
+  font-size: 14px;
+  color: #ec6090;
+  font-weight: 400;
+}
+
+.top-streamers ul li h6 i {
+  color: #fff;
+  background-color: #ec6090;
+  border-radius: 50%;
+  font-size: 12px;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  text-align: center;
+  line-height: 20px;
+  margin-right: 3px;
+}
+
+.top-streamers ul li .main-button {
+  float: right;
+}
+
+.top-streamers ul li .main-button a {
+  padding: 8px 20px;
+}
+
+/* 
+---------------------------------------------
+Profile Style
+--------------------------------------------- 
+*/
+
+.main-profile {
+  border-radius: 23px;
+  padding: 30px;
+  background-color: #1f2122;
+}
+
+.main-profile .main-info span {
+  font-size: 14px;
+  color: #fff;
+  background-color: #e75e8d;
+  padding: 8px 20px;
+  display: inline-block;
+  border-radius: 25px;
+  font-weight: 400;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  margin-bottom: 15px;
+}
+
+.main-profile .main-info h4 {
+  margin-bottom: 20px;
+}
+
+.main-profile .main-info .main-border-button {
+  margin-top: 25px;
+}
+
+.main-profile ul {
+  border-radius: 23px;
+  padding: 30px;
+  background-color: #27292a;
+}
+
+.main-profile ul li {
+  width: 100%;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #666;
+}
+
+.main-profile ul li span {
+  font-weight: 500;
+  color: #ec6090;
+}
+
+.main-profile ul li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.clips {
+  margin-top: 30px;
+  border-top: 2px solid #27292a;
+}
+
+.clips .heading-section {
+  margin-top: 30px;
+}
+
+.clips .item  {
+  border-radius: 23px;
+  padding: 30px 15px;
+  background-color: #27292a;
+  margin-bottom: 30px;
+}
+
+.clips .item .thumb {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.clips .item .thumb a {
+  position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-23px, -23px);
+    width: 46px;
+    height: 46px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    line-height: 46px;
+    color: #ec6090;
+}
+
+.clips .item h4 {
+  font-size: 15px;
+  display: inline-block;
+}
+
+.clips .item span i {
+  color: #ec6090;
+}
+
+.clips .item span {
+  float: right;
+  color: #fff;
+  font-size: 14px;
+}
+
+.clips .main-button {
+  margin-top: 10px;
+  text-align: center;
+}
+
+/*
+---------------------------------------------
+Responsive Style
+--------------------------------------------- 
+*/
+
+body {
+  overflow-x: hidden;
+}
+
+@media (max-width: 767px) {
+  body .page-content {
+    padding: 0px 30px;
+  }
+  .main-banner {
+    text-align: center;
+  }
+  .main-banner h4 {
+    font-size: 35px;
+  }
+  .gaming-library .item ul li,
+  .gaming-library .item ul li:first-child,
+  .gaming-library .item ul li:last-child {
+    width: 100% !important;
+    text-align: center !important;
+  }
+  .gaming-library .item ul li {
+    margin-top: 30px;
+  }
+  .top-downloaded ul li .download i {
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+  }
+  .top-downloaded ul li img {
+    margin-right: 10px;
+  }
+  .top-downloaded ul li span {
+    font-size: 14px;
+  }
+  .top-streamers ul li .main-button {
+    float: none;
+    margin-top: 10px;
+  }
+  .top-streamers ul li .main-button a {
+    width: 100%;
+    text-align: center;
+  }
+  .top-streamers,
+  .top-downloaded {
+    max-height: 100%;
+    min-height: 100%;
+  }
+  .most-popular .item .inner-item {
+    margin-bottom: 20px;
+  }
+
+
+}
+.view-effect {
+       position: absolute;
+       bottom: -100px;
+       text-align: center;
+       width: 100%;
+       opacity: 0;
+       visibility: hidden;
+       transition: all .4s;
+   }
+@media (max-width: 992px) {
+  .background-header {
+  display: inline-block;
+  }
+  .header-area .main-nav #search {
+    display: none;
+  }
+  .heading-section h4 {
+    font-size: 20px;
+  }
+  .gaming-library .item ul li {
+    width: 48% !important;
+  }
+  .gaming-library .item ul li:last-child {
+    text-align: left;
+  }
+  .featured-games {
+    margin-bottom: 60px;
+  }
+  .start-stream .item {
+    margin: 15px 0px;
+  }
+  .feature-banner .thumb {
+    margin-top: 30px;
+  }
+  .main-profile .main-info {
+    margin: 45px 0px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .header-area .main-nav .nav li {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+  .header-area .main-nav .logo {
+    margin-right: 30px;
+    border-right: none;
+  }
+  .gaming-library .item ul li {
+    width: 16%;
+  }
+}
+/*danh sách phim*/
+.item {
+    margin-bottom: 30px; /* Thêm khoảng cách giữa các phim */
+}
+
+/*form lọc phim*/
+.list-movie-filter-item {
+    flex: 1; /* Đảm bảo tất cả các mục có cùng chiều ngang */
+    width: 200px; /* Chiều rộng tối đa cho mỗi mục */
+}
+/* Thay đổi nền và màu chữ cho các select */
+.form-select {
+    background-color: #4B4B4B; /* Màu xám đậm */
+    color: #A9A9A9; /* Màu xám nhạt */
+    border: none; /* Ẩn viền */
+    outline: none; /* Ẩn viền khi click */
+    padding: 8px; /* Tăng kích thước padding để nhìn đẹp hơn */
+    border-radius: 5px; /* Bo tròn góc */
+    scrollbar-width: thin; /* Thanh cuộn nhỏ (Firefox) */
+}
+
+.form-select option {
+    background-color: #4B4B4B; /* Màu nền */
+    color: #A9A9A9; /* Màu chữ */
+}
+
+/* Thanh cuộn (Webkit-based browsers: Chrome, Edge, Safari) */
+.form-select::-webkit-scrollbar {
+    width: 6px; /* Độ rộng của thanh cuộn */
+    height: 6px; /* Chiều cao của thanh cuộn ngang (nếu có) */
+}
+
+.form-select::-webkit-scrollbar-thumb {
+    background: #6c757d; /* Màu của thanh cuộn */
+    border-radius: 10px; /* Bo tròn thanh cuộn */
+}
+
+.form-select::-webkit-scrollbar-thumb:hover {
+    background: #495057; /* Màu khi hover */
+}
+
+.form-select::-webkit-scrollbar-track {
+    background: #4B4B4B; /* Màu nền track của thanh cuộn */
+}
+
+/* Ẩn màu viền khi click vào select */
+.form-select:focus {
+    border: none; /* Không viền */
+    outline: none; /* Không outline */
+}
+
+/*phimbo,phimchieurap*/
+    .notification-container {
+        position: fixed; /* Đặt vị trí cố định để không bị ảnh hưởng bởi cuộn trang */
+        top: 20px; /* Khoảng cách từ trên cùng */
+        right: 20px; /* Khoảng cách từ bên phải */
+        z-index: 9999; /* Đảm bảo nó nằm trên tất cả các phần tử khác */
+        pointer-events: auto; /* Cho phép người dùng tương tác với thông báo */
+        top: 80px; /* Điều chỉnh khoảng cách từ trên cùng để thông báo nằm dưới header */
+
+    }
+
+    .notification-container .alert {
+        font-size: 1.5rem; /* Kích thước chữ lớn hơn */
+        padding: 20px; /* Khoảng cách bên trong thông báo */
+        border-radius: 8px; /* Bo góc cho thông báo */
+        text-align: center; /* Căn giữa chữ trong thông báo */
+    }
+
+    .alert-success {
+        background-color: #d4edda; /* Màu nền cho thông báo thành công */
+        color: #155724; /* Màu chữ cho thông báo thành công */
+        border: 1px solid #c3e6cb; /* Viền cho thông báo thành công */
+    }
+
+    .alert-danger {
+        background-color: #f8d7da; /* Màu nền cho thông báo lỗi */
+        color: #721c24; /* Màu chữ cho thông báo lỗi */
+        border: 1px solid #f5c6cb; /* Viền cho thông báo lỗi */
+    }
+
+    /* Thêm phần CSS này nếu cần thiết để đảm bảo không có phần tử khác chèn lên */
+    body {
+        position: relative; /* Đặt position cho body để các phần tử con có thể sử dụng z-index */
+    }
+
+
+    .rating label {
+     font-size: 24px; /* Kích thước ngôi sao */
+     cursor: pointer; /* Con trỏ chuột khi di chuột qua */
+ }
+
+ .star-filled {
+     color: gold; /* Màu vàng cho sao đã được đánh giá */
+ }
+
+ .rating label:not(.star-filled) {
+     color: lightgray; /* Màu xám cho sao không được đánh giá */
+ }
+.poster-wrapper {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    width: 100%;
+}
+
+.poster-wrapper:hover img {
+    filter: blur(1px); /* Làm mờ poster */
+    opacity: 0.9;      /* Làm nhạt poster */
+    transform: scale(1.05); /* Phóng to nhẹ ảnh khi hover */
+    transition: all 0.3s ease;
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2; /* Đảm bảo nút Play hiển thị trên hình ảnh */
+    pointer-events: none; /* Đảm bảo nút không chặn tương tác hover */
+}
+
+.poster-wrapper:hover .play-button {
+    opacity: 1; /* Hiển thị nút Play khi hover */
+}
+
+.btn-pink-moon {
+    background: #ec008c;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #fc6767, #ec008c);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #fc6767, #ec008c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+    border: 3px solid #eee;
+}
+.btn-funky-moon {
+    background: #A770EF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(145deg, #FDB99B, #CF8BF3, #A770EF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(145deg, #FDB99B, #CF8BF3, #A770EF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+    border: 3px solid #eee;
+}
+
+
+
+
+ .description-container {
+    height: 200px; /* Chiều cao tối đa của khung */
+    overflow-y: auto; /* Hiển thị thanh cuộn dọc nếu nội dung vượt quá chiều cao */
+    padding: 10px; /* Khoảng cách giữa văn bản và cạnh khung */
+    border: none; /* Ẩn viền của khung */
+    border-radius: 5px; /* Bo góc cho khung (nếu muốn) */
+
+}
+
+/* Thanh cuộn tùy chỉnh */
+.description-container::-webkit-scrollbar {
+    width: 8px; /* Độ rộng của thanh cuộn */
+}
+
+.description-container::-webkit-scrollbar-track {
+    background: rgba(51, 51, 51, 0.8); /* Màu nền của thanh cuộn */
+}
+
+.description-container::-webkit-scrollbar-thumb {
+    background: #555; /* Màu của phần kéo thanh cuộn */
+    border-radius: 5px; /* Bo góc cho phần kéo */
+}
+
+.description-container::-webkit-scrollbar-thumb:hover {
+    background: #777; /* Màu khi di chuột lên phần kéo */
+}
+
+.description-text {
+    color: white; /* Màu chữ */
+}
+
+/* detail phim*/
+
+/* Home title,name*/
+.movie-link {
+    position: relative; /* Để badge được định vị đúng */
+    display: inline-block; /* Cho phép hover hoạt động */
+    text-decoration: none; /* Bỏ gạch chân của thẻ a */
+    transition: transform 0.3s ease; /* Hiệu ứng chuyển động mượt mà */
+       display: flex;
+        flex-direction: column;
+        align-items: center;
+}
+.status {
+         position: absolute; /* Định vị ở góc trên bên phải */
+         top: 4px; /* Tăng khoảng cách từ trên */
+         right: 13px; /* Khoảng cách từ bên phải */
+         background-color: #fcd900; /* Màu nền hồng */
+         color: black !important; /* Màu chữ trắng */
+         padding: 4px; /* Đệm cho thẻ trạng thái */
+         border-radius: 5px; /* Bo tròn các góc */
+         font-size: 0.6em; /* Kích thước chữ nhỏ hơn */
+         z-index: 1; /* Đảm bảo trạng thái nằm trên các phần khác */
+         box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+         opacity: 1 !important; /* Giữ độ trong suốt của .status không thay đổi */
+         pointer-events: none; /* Ngăn không cho nhận sự kiện hover */
+     }
+.movie-link:hover {
+    opacity: 0.6; /* Giảm độ trong suốt khi hover */
+}
+.owl-item{
+margin-top: 20px;
+}
+.status-badge {
+    position: absolute; /* Định vị ở góc trên bên phải */
+    top: 20px; /* Tăng khoảng cách từ trên */
+    right: 25px; /* Khoảng cách từ bên phải */
+    background-color: #fcd900; /* Màu nền hồng */
+    color: black !important; /* Màu chữ trắng */
+    padding: 4px; /* Đệm cho thẻ trạng thái */
+    border-radius: 5px; /* Bo tròn các góc */
+    font-size: 0.6em; /* Kích thước chữ nhỏ hơn */
+    z-index: 1; /* Đảm bảo trạng thái nằm trên các phần khác */
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+.item {
+    position: relative; /* Để trạng thái được định vị đúng */
+    height: 380px; /* Chiều cao cố định cho mỗi item */
+}
+
+.poster-container {
+    width: 200px; /* Đặt chiều rộng khung chứa hình ảnh là 100% */
+    height: 100%; /* Chiều cao cố định cho khung hình ảnh */
+    overflow: hidden; /* Ẩn bất kỳ phần nào của hình ảnh ra ngoài khung */
+    position: relative; /* Để định vị các phần tử con như trạng thái nếu cần */
+
+}
+
+.movie-poster {
+    width: 200px; /* Để chiều rộng tự động */
+    height: 300px; /* Sử dụng chiều cao của khung chứa */
+    max-width: 100%; /* Đảm bảo không vượt quá chiều rộng của khung chứa */
+    object-fit: cover; /* Giữ tỉ lệ ảnh, cắt bớt nếu cần */
+    object-position: center; /* Căn giữa hình ảnh trong khung */
+
+}
+
+.movie-title, .movie-name {
+
+    width: 100%; /* Chiều rộng bằng với khung chứa */
+    white-space: nowrap; /* Ngăn không cho dòng xuống dòng */
+    overflow: hidden; /* Ẩn nội dung tràn ra ngoài */
+    text-overflow: ellipsis; /* Hiển thị ba chấm nếu nội dung tràn */
+    text-align: center; /* Căn giữa văn bản */
+    margin: 5px 0; /* Khoảng cách cho tiêu đề và tên */
+}
+
+.movie-title {
+    font-size: 0.9em; /* Kích thước chữ lớn hơn cho tiêu đề */
+    font-weight: bold; /* Làm chữ đậm để nổi bật hơn */
+    color: #fff; /* Đặt màu chữ thành trắng */
+    margin: 5px 0; /* Khoảng cách trên và dưới */
+    text-align: center; /* Căn giữa văn bản */
+    max-width: 150px; /* Chiều dài tối đa */
+    white-space: nowrap; /* Ngăn không cho dòng xuống dòng */
+    overflow: hidden; /* Ẩn phần văn bản vượt quá */
+    text-overflow: ellipsis; /* Hiển thị 3 chấm nếu văn bản bị cắt */
+    display: inline-block; /* Cần thiết để áp dụng max-width */
+}
+
+.movie-name {
+    font-size: 0.6em; /* Kích thước chữ nhỏ hơn cho tên phim */
+    color: #fff; /* Đặt màu chữ thành trắng */
+    margin: 0; /* Không có khoảng cách */
+    text-align: center; /* Căn giữa văn bản */
+    max-width: 150px; /* Chiều dài tối đa */
+    white-space: nowrap; /* Ngăn không cho dòng xuống dòng */
+    overflow: hidden; /* Ẩn phần văn bản vượt quá */
+    text-overflow: ellipsis; /* Hiển thị 3 chấm nếu văn bản bị cắt */
+    display: inline-block; /* Cần thiết để áp dụng max-width */
+}
+
+.featured-games ul li {
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Hiệu ứng chuyển động */
+}
+
+.featured-games ul li:hover {
+    transform: scale(1.05); /* Phóng to 5% */
+    opacity: 0.8; /* Giảm độ trong suốt xuống còn 80% */
+}
+
+.featured-games ul li a img {
+    transition: opacity 0.3s ease; /* Hiệu ứng chuyển động cho hình ảnh */
+}
+
+.featured-games ul li:hover a img {
+    opacity: 0.8; /* Giảm độ trong suốt của hình ảnh khi hover */
+}
+
+.breadcrumb-item a {
+      color: #ec6090;
+      text-decoration: none;
+    }
+    .breadcrumb-item.active {
+      color: #6c757d;
+    }
+
+.avatar {
+  vertical-align: middle;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;  /* Cắt ảnh để nó phù hợp với khung hình tròn */
+}
+
+.description-text p {
+    color: #e2e3e4; /* Đặt màu chữ trắng */
+}
+
+.description-text strong {
+    color: #f6f7f7; /* Đặt màu chữ trắng */
+}
+
+@media (max-width: 576px) {
+    .shrink-on-mobile {
+            transform: scale(0.5); /* Thu nhỏ 50% */
+            transform-origin: top center; /* Điểm gốc thu nhỏ */
+            margin-bottom: -65%; /* Thu hẹp khoảng trống thừa */
+        }
+    .shrink {
+            height: 400px !important; /* Reduce height to 400px for mobile */
+             margin-bottom: 30px;
+        }
+   .shrink-row{
+           margin-bottom: -30px;
+   }
+    .thumb {
+        transform: scale(0.8); /* Thu nhỏ 50% */
+        transform-origin: top center; /* Điểm gốc thu nhỏ */
+    }
+    .owl-item {
+            transform: scale(0.8); /* Thu nhỏ 50% */
+            transform-origin: top center; /* Điểm gốc thu nhỏ */
+        }
+    .thumb .status {
+            right: 40px; /* Khoảng cách từ bên phải */
+    }
+
+    .poster-wrapper{
+            transform: scale(0.5); /* Thu nhỏ 50% */
+            transform-origin: top center; /* Điểm gốc thu nhỏ */
+            margin-bottom: -60%;
+    }
+    .movie-detail h2 {
+            font-size: 70%;
+    }
+    .movie-detail p {
+                font-size: 70%;
+        }
+    .description-container {
+        transform: scale(0.5); /* Thu nhỏ 50% */
+        transform-origin: top left; /* Điểm gốc thu nhỏ */
+        height: 200px; /* Chiều cao tối đa của khung */
+        width: 660px;
+        overflow-y: auto; /* Hiển thị thanh cuộn dọc nếu nội dung vượt quá chiều cao */
+        padding: 10px; /* Khoảng cách giữa văn bản và cạnh khung */
+        border: none; /* Ẩn viền của khung */
+        border-radius: 5px; /* Bo góc cho khung (nếu muốn) */
+        margin-bottom: -30%;
+    }
+    .action {
+     transform: scale(0.5); /* Thu nhỏ 50% */
+            transform-origin: top left; /* Điểm gốc thu nhỏ */
+           width: 660px;
+        align-items: flex-start; /* Canh các phần tử về phía bên trái */
+    }
+
+    .action .rating-container,
+    .action p,
+    .action form {
+        margin-bottom: 10px; /* Thêm khoảng cách giữa các phần tử */
+    }
+    .gradient-custom textarea {
+        height: 50px;
+    }
+    .video-container iframe{
+    height: 230px;
+    }
+    .breadcrumb{
+        margin-top: 30px;
+     font-size: 30%;
+    }
+
+}
+
+#searchResults {
+    max-height: 335px; /* Đặt chiều cao cố định */
+    overflow-y: auto;  /* Thêm thanh cuộn dọc */
+    padding: 10px;     /* Khoảng cách bên trong */
+}
+
+/* Tùy chỉnh thanh cuộn */
+#searchResults::-webkit-scrollbar {
+    width: 8px; /* Độ rộng thanh cuộn */
+}
+
+#searchResults::-webkit-scrollbar-thumb {
+    background-color: pink; /* Màu thanh trượt */
+    border-radius: 10px;    /* Bo góc thanh trượt */
+}
+
+#searchResults::-webkit-scrollbar-thumb:hover {
+    background-color: #ff69b4; /* Màu khi hover */
+}
+
+#searchResults::-webkit-scrollbar-track {
+    background: transparent; /* Không viền */
+}
+/* Đặt nút Reply và nút Xóa cạnh nhau */
+.d-flex.justify-content-between .reply-btn {
+    margin-left: auto; /* Đẩy nút Reply về phía bên phải */
+    margin-right: 10px; /* Khoảng cách giữa nút Reply và nút Xóa */
+}
+
+/* Canh chỉnh form Xóa */
+.d-flex.justify-content-between form {
+    display: inline-block; /* Để form nằm trên cùng hàng với nút Reply */
+}
+
+/* Banner container */
+.banner-bottom {
+    position: fixed;
+    bottom: 0px;
+    left: 50%; /* Căn giữa container */
+    transform: translateX(-50%); /* Dịch chuyển về giữa */
+    z-index: 9999;
+    overflow: hidden;
+}
+
+/* Swiper container */
+.swiper-container {
+    width: 500px; /* Kích thước cố định */
+    height: auto;
+}
+
+/* Swiper slide */
+.swiper-slide img {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+}
+
+/* Nút đóng banner */
+.btn-close {
+    position: absolute;
+    top: 1px; /* Đặt nút nằm phía trên một chút so với Swiper */
+    right: 1px; /* Canh lề phải */
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    cursor: pointer;
+    border-radius: 50%; /* Tạo hình tròn cho nút */
+    font-size: 16px;
+    line-height: 1;
+    z-index: 10000; /* Đảm bảo nút nằm trên tất cả thành phần khác */
+}
+

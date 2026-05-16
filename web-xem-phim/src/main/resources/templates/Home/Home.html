@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="${_csrf.token}"/>
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <title>Cyborg - Awesome HTML5 Template</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="/assets/css/owl.css">
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="/" class="logo">
+                        <img src="/assets/images/logo2.png" alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+<!--                     ***** Search End *****-->
+<!--                    <div class="search-input" style="width: 500px;">-->
+<!--                        <form id="search" action="/locphim" method="get">-->
+<!--                            <input type="text" placeholder="Type Something" id="searchText" name="keyword" oninput="liveSearch()"/>-->
+<!--                            <i class="fa fa-search" onclick="document.getElementById('search').submit();"></i>-->
+<!--                        </form>-->
+<!--                        <div id="searchResults" style="display: none; margin-top: 5px; background-color: #1f2122; border-radius: 5px;"></div>-->
+<!--                    </div>-->
+
+                    <div class="search-input" style="width: 500px;" id="searchContainer">
+                        <form id="search" action="/search" method="get">
+                            <input type="text" placeholder="Type Something" id="searchText" name="keyword" oninput="liveELSearch()" />
+                            <i class="fa fa-search" onclick="document.getElementById('search').submit();"></i>
+                        </form>
+                        <div id="searchResults" style="display: none; margin-top: 5px; background-color: #1f2122; border-radius: 5px;"></div>
+                    </div>
+
+                    <!-- ***** Search End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+
+                        <li><a sec:authorize="hasAnyAuthority('ADMIN')" href="/admin" class="active">Admin</a></li>
+                        <li><a href="/" class="active">Home</a></li>
+                        <li><a th:href="@{/locphim(cat='phimbo')}">Phim Bộ</a></li>
+                        <li><a th:href="@{/locphim(cat='phimle')}">Phim Lẻ</a></li>
+                        <li sec:authorize="!isAuthenticated()">
+                            <a href="/login">Đăng nhập</a>
+                        </li>
+                        <li sec:authorize="isAuthenticated()">
+                            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Đăng xuất
+                            </a>
+                            <form id="logout-form" th:action="@{/logout}" method="post" style="display: none;">
+                                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                            </form>
+                        </li>
+                        <li class="last-child" sec:authorize="isAuthenticated()">
+                            <a th:href="@{/profile}">
+                                Profile
+                                <img th:src="${profileImage != null ? '/profile_images/' + profileImage : '/profile_images/avatardefault.png'}"
+                                     class="profile-avatar">
+                            </a>
+                        </li>
+
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- ***** Header Area End ***** -->
+<div id="banner-bottom" th:fragment="banner-bottom" class="banner-bottom">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div th:each="banner : ${bottomBanners}" class="swiper-slide">
+                <a th:href="${banner.redirectUrl}" target="_blank">
+                    <img th:src="${banner.imageUrl}" alt="Banner" />
+                </a>
+            </div>
+        </div>
+    </div>
+    <button id="close-banner" class="btn-close">X</button>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-content">
+                <!-- ***** Banner Start ***** -->
+                <div th:each="banner : ${topBanners}" class="col-12 mb-3">
+                    <a th:href="${banner.redirectUrl}" target="_blank">
+                        <img style="border-radius: 23px" th:src="${banner.imageUrl}" class="img-fluid" alt="Banner" />
+                    </a>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 col-md-6 col-sm-12">
+                        <div class="featured-games header-text shrink" style="height: 570px">
+                            <div class="heading-section">
+                                <h4><em>Phim</em> Dành cho bạn</h4>
+                            </div>
+                            <div class="owl-features owl-carousel owl-loaded owl-drag">
+                                <div class="owl-stage-outer" >
+                                    <div class="owl-stage">
+                                        <!-- Hiển thị danh sách phim gợi ý -->
+                                        <div style="" th:if="${!recommendedMovies.empty}"
+                                             th:each="movie : ${recommendedMovies}"
+                                             class="owl-item">
+                                            <div class="item">
+                                                <div class="thumb">
+                                                    <a class="movie-link"
+                                                       th:href="${movie.isSeries} ? @{/phimbo/{slug}(slug=${movie.slug})} : @{/phimle/{slug}(slug=${movie.slug})}">
+                                                        <div class="poster-container"> <!-- Khung riêng cho ảnh -->
+                                                            <img th:src="@{${movie.posterUrl}}"
+                                                                 alt=""
+                                                                 class="movie-poster">
+
+                                                        </div>
+                                                        <h4 style="" class="" th:text="${movie.title}"></h4>
+                                                        <span class="" th:text="${movie.name}"></span>
+                                                    </a>
+                                                    <span class="status"
+                                                          th:if="${movie.isSeries and movie.status == 'Sắp Chiếu'}"
+                                                          th:text="'Sắp Chiếu'">
+</span>
+                                                    <span class="status"
+                                                          th:if="${movie.isSeries and movie.status != 'Sắp Chiếu'}"
+                                                          th:text="'Tập ' + (${movie.episodes.size() > 0 ? movie.episodes[movie.episodes.size() - 1].episodeNumber : ''}) + ' / ' + ${movie.totalEpisodes}">
+</span>
+                                                    <span class="status"
+                                                          th:unless="${movie.isSeries}"
+                                                          th:text="${movie.status}">
+</span>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- Nếu danh sách phim gợi ý rỗng, hiển thị danh sách phim hot -->
+                                        <div th:if="${recommendedMovies.empty}" style="" th:each="movie : ${top6HotMovies}"
+                                             class="owl-item">
+                                            <div class="item">
+                                                <div class="thumb">
+                                                    <a class="movie-link"
+                                                       th:href="${movie.isSeries} ? @{/phimbo/{slug}(slug=${movie.slug})} : @{/phimle/{slug}(slug=${movie.slug})}">
+                                                        <div class="poster-container"> <!-- Khung riêng cho ảnh -->
+                                                            <img th:src="@{${movie.posterUrl}}"
+                                                                 alt=""
+                                                                 class="movie-poster">
+
+                                                        </div>
+                                                        <h4 class="" th:text="${movie.title}"></h4>
+                                                        <span class="" th:text="${movie.name}"></span>
+                                                    </a>
+                                                    <span class="status"
+                                                          th:if="${movie.isSeries and movie.status == 'Sắp Chiếu'}"
+                                                          th:text="'Sắp Chiếu'">
+</span>
+                                                    <span class="status"
+                                                          th:if="${movie.isSeries and movie.status != 'Sắp Chiếu'}"
+                                                          th:text="'Tập ' + (${movie.episodes.size() > 0 ? movie.episodes[movie.episodes.size() - 1].episodeNumber : ''}) + ' / ' + ${movie.totalEpisodes}">
+</span>
+                                                    <span class="status"
+                                                          th:unless="${movie.isSeries}"
+                                                          th:text="${movie.status}">
+</span>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="owl-dots disabled"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="featured-games header-text shrink-row" style="height: 570px;">
+                            <div class="heading-section">
+                                <h4><em>Phim</em> Hot Tuần</h4>
+                            </div>
+                            <!-- Tab Navigation -->
+                            <ul style="border-bottom: 1px solid #e75e8d;" class="nav nav-tabs" id="movieTab"
+                                role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="series-tab" data-toggle="tab" href="#series"
+                                       role="tab" aria-controls="series" aria-selected="true">Phim Bộ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="theater-tab" data-toggle="tab" href="#theater" role="tab"
+                                       aria-controls="theater" aria-selected="false">Phim Lẻ</a>
+                                </li>
+                            </ul>
+
+                            <!-- Tab Content -->
+                            <div class="tab-content" id="movieTabContent" style="margin-top: 20px;">
+                                <!-- Phim Bộ -->
+                                <div class="tab-pane fade show active" id="series" role="tabpanel"
+                                     aria-labelledby="series-tab">
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li th:each="movieData : ${moviesSeriesWithRatings}"
+                                            style="border-bottom: 1px solid #7b7b7b; padding: 5px 0;">
+                                            <a th:href="${movieData.movie.isSeries} ? @{/phimbo/{slug}(slug=${movieData.movie.slug})} : @{/phimle/{slug}(slug=${movieData.movie.slug})}"
+                                               style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                                                <img th:src="@{${movieData.movie.posterUrl}}"
+                                                     alt=""
+                                                     style="max-width: 46px;max-height: 70px; margin-right: 15px; border-radius: 10px;">
+                                                <div style="flex-grow: 1;">
+                                                    <h6 th:text="${movieData.movie.title}"
+                                                        style="margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;"></h6>
+                                                    <div style="font-size: 0.9em; color: gray; display: flex; justify-content: space-between; align-items: center;">
+                                                        <div style="display: flex; align-items: center;">
+                                                            <span style="color: yellow; margin-right: 5px;">★</span>
+                                                            <!-- Ngôi sao màu vàng -->
+                                                            <span th:text="${#numbers.formatDecimal(movieData.averageRating, 1, 1)}">0</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center;">
+                                                            <i class="bi bi-eye" style="margin-right: 5px;"></i>
+                                                            <span th:text="${movieData.movie.viewCount}">0</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center;">
+                                                            <i class="bi bi-calendar-range"
+                                                               style="margin-right: 5px;"></i>
+                                                            <span th:text="${movieData.movie.releaseYear}"></span>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Phim Lẻ -->
+                                <div class="tab-pane fade" id="theater" role="tabpanel" aria-labelledby="theater-tab">
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li th:each="movieData : ${moviesTheaterWithRatings}"
+                                            style="border-bottom: 1px solid #7b7b7b; padding: 5px 0;">
+                                            <a th:href="${movieData.movie.isSeries} ? @{/phimbo/{slug}(slug=${movieData.movie.slug})} : @{/phimle/{slug}(slug=${movieData.movie.slug})}"
+                                               style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                                                <img th:src="@{@{${movieData.movie.posterUrl}}}"
+                                                     alt=""
+                                                     style="max-width: 46px;max-height: 70px; margin-right: 15px; border-radius: 10px;">
+                                                <div style="flex-grow: 1;">
+                                                    <h6 th:text="${movieData.movie.title}"
+                                                        style="margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;"></h6>
+                                                    <div style="font-size: 0.9em; color: gray; display: flex; justify-content: space-between; align-items: center;">
+                                                        <div style="display: flex; align-items: center;">
+                                                            <span style="color: yellow; margin-right: 5px;">★</span>
+                                                            <!-- Ngôi sao màu vàng -->
+                                                            <span th:text="${#numbers.formatDecimal(movieData.averageRating, 1, 1)}">0</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center;">
+                                                            <i class="bi bi-eye" style="margin-right: 5px;"></i>
+                                                            <span th:text="${movieData.movie.viewCount}">0</span>
+                                                        </div>
+                                                        <div style="display: flex; align-items: center;">
+                                                            <i class="bi bi-calendar-range"
+                                                               style="margin-right: 5px;"></i>
+                                                            <span th:text="${movieData.movie.releaseYear}"></span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- ***** Banner End ***** -->
+                <div class="col-lg-12">
+                    <!-- ***** Phim Lẻ ***** -->
+                    <div class="most-popular">
+                        <div class="heading-section">
+                            <h4><em>Phim</em> Lẻ</h4>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-6 col-6 shrink-on-mobile" th:each="movie : ${moviesTheater}">
+                                <div class="item text-center">
+                                    <a th:href="@{/phimle/{slug}(slug=${movie.slug})}" class="movie-link">
+                                        <div class="poster-container"> <!-- Khung riêng cho ảnh -->
+                                            <img th:src="@{${movie.posterUrl}}" alt=""
+                                                 class="movie-poster">
+
+                                        </div>
+                                        <h4 class="movie-title" th:text="${movie.title}"></h4>
+                                        <span class="movie-name" th:text="${movie.name}"></span>
+                                    </a>
+                                    <span class="status-badge" th:text="${movie.status}"></span>
+                                    <!-- Thêm thẻ cho trạng thái -->
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="main-button">
+                            <a th:href="@{/locphim(cat='phimle')}">Xem Thêm</a>
+                        </div>
+
+                    </div>
+
+                    <!-- ***** Phim Bộ ***** -->
+                    <div class="most-popular">
+                        <div class="heading-section">
+                            <h4><em>Phim</em> Bộ</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-6 col-6 shrink-on-mobile " th:each="movie : ${moviesSeries}">
+                                <div class="item text-center justify-content-center">
+                                    <a th:href="@{/phimbo/{slug}(slug=${movie.slug})}" class="movie-link">
+                                        <div class="poster-container"> <!-- Khung riêng cho ảnh -->
+
+                                            <img th:src="@{${movie.posterUrl}}" alt=""
+                                                 class="movie-poster">
+                                            <!-- Thêm thẻ cho trạng thái -->
+                                        </div>
+                                        <h4 class="movie-title" th:text="${movie.title}"></h4>
+                                        <span class="movie-name" th:text="${movie.name}"></span>
+                                    </a>
+                                    <span class="status-badge"
+                                          th:if="${movie.status == 'Sắp Chiếu'}"
+                                          th:text="'Sắp Chiếu'">
+</span>
+                                    <span class="status-badge"
+                                          th:if="${movie.isSeries and movie.status != 'Sắp Chiếu'}"
+                                          th:text="'Tập ' + (${movie.episodes.size() > 0 ? movie.episodes[movie.episodes.size() - 1].episodeNumber : ''}) + ' / ' + ${movie.totalEpisodes}">
+</span>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main-button">
+                            <a th:href="@{/locphim(cat='phimbo')}">Xem Thêm</a>
+                        </div>
+                    </div>
+
+                    <!-- ***** Anime ***** -->
+                    <div class="most-popular">
+                        <div class="heading-section">
+                            <h4><em>Phim</em> Hoạt Hình</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-6 col-6 shrink-on-mobile" th:each="movie : ${moviesAnime}" var="movie">
+                                <div class="item text-center">
+                                    <a class="movie-link"
+                                       th:href="${movie.isSeries} ? @{/phimbo/{slug}(slug=${movie.slug})} : @{/phimle/{slug}(slug=${movie.slug})}">
+                                        <div class="poster-container"> <!-- Khung riêng cho ảnh -->
+                                            <img th:src="@{${movie.posterUrl}}" alt=""
+                                                 class="movie-poster">
+                                        </div>
+                                        <h4 class="movie-title" th:text="${movie.title}"></h4>
+                                        <span class="movie-name" th:text="${movie.name}"></span>
+                                    </a>
+                                    <span class="status-badge"
+                                          th:if="${movie.isSeries and movie.status == 'Sắp Chiếu'}"
+                                          th:text="'Sắp Chiếu'">
+</span>
+                                    <span class="status-badge"
+                                          th:if="${movie.isSeries and movie.status != 'Sắp Chiếu'}"
+                                          th:text="'Tập ' + (${movie.episodes.size() > 0 ? movie.episodes[movie.episodes.size() - 1].episodeNumber : ''}) + ' / ' + ${movie.totalEpisodes}">
+</span>
+                                    <span class="status-badge"
+                                          th:unless="${movie.isSeries}"
+                                          th:text="${movie.status}">
+</span>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main-button">
+                            <a th:href="@{/locphim(genreIds='2')}">Xem Thêm</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright © 2036 <a href="#">Cyborg Gaming</a> Company. All rights reserved.
+
+                    <br>Design: <a href="https://templatemo.com" target="_blank"
+                                   title="free CSS templates">TemplateMo</a>
+                    Distributed By <a href="https://themewagon.com" target="_blank">ThemeWagon</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="notification-container">
+    <div th:if="${errorMessage}" id="errorAlert"
+         class="alert alert-danger alert-dismissible fade show" role="alert"
+         onclick="hideAlert('errorAlert');">
+        <span th:text="${errorMessage}"></span>
+    </div>
+
+    <div th:if="${successMessage}" id="successAlert"
+         class="alert alert-success alert-dismissible fade show" role="alert"
+         onclick="hideAlert('successAlert');">
+        <span th:text="${successMessage}"></span>
+    </div>
+</div>
+<script>
+
+
+    function highlightStars(rating) {
+     const stars = document.querySelectorAll('.rating label');
+     stars.forEach((star, index) => {
+         if (index < rating) {
+             star.classList.add('star-filled'); // Sáng
+         } else {
+             star.classList.remove('star-filled'); // Tắt
+         }
+     });
+ }
+
+ function resetStars(averageRating) {
+     const stars = document.querySelectorAll('.rating label');
+
+     // Xóa tất cả các lớp star-filled
+     stars.forEach(star => {
+         star.classList.remove('star-filled');
+     });
+
+     // Hiển thị lại sao dựa trên điểm trung bình
+     const selectedRating = document.querySelector('input[name="rating"]:checked');
+     if (selectedRating) {
+         const ratingValue = parseInt(selectedRating.value);
+         highlightStars(ratingValue); // Hiển thị sao theo rating đã chọn
+     } else {
+         highlightStars(Math.round(averageRating)); // Hiển thị sao theo điểm trung bình
+     }
+ }
+
+ function submitRating(rating) {
+     document.querySelector('input[name="rating"][value="' + rating + '"]').checked = true; // Chọn rating
+     document.getElementById('ratingForm').submit(); // Gửi form
+ }
+</script>
+<script>
+    // Đợi trang tải xong
+    document.addEventListener("DOMContentLoaded", function() {
+        // Tự động ẩn thông báo sau 5 giây
+        setTimeout(function() {
+            var errorAlert = document.getElementById('errorAlert');
+            var successAlert = document.getElementById('successAlert');
+            if (errorAlert) {
+                errorAlert.style.display = 'none';
+            }
+            if (successAlert) {
+                successAlert.style.display = 'none';
+            }
+        }, 3000); // 5000 ms = 5 giây
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.feature-banner').slick({
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            arrows: true,
+            dots: true
+        });
+    });
+</script>
+<script>
+    // Initialize Bootstrap Carousel with auto-slide
+    document.addEventListener('DOMContentLoaded', function () {
+        const carousel = new bootstrap.Carousel(document.querySelector('#recommendedMoviesCarousel'), {
+            interval: 5000, // 5 seconds between slides
+            ride: 'carousel'
+        });
+    });
+
+</script>
+
+<!-- Scripts -->
+<!-- Bootstrap core JavaScript -->
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="/assets/js/isotope.min.js"></script>
+<script src="/assets/js/owl-carousel.js"></script>
+<script src="/assets/js/tabs.js"></script>
+<script src="/assets/js/popup.js"></script>
+<script src="/assets/js/custom.js"></script>
+</body>
+
+</html>

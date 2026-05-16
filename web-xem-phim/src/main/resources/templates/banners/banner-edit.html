@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <title>Modernize Free</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png"/>
+    <link rel="stylesheet" href="/assets/css/styles.min.css"/>
+</head>
+<body>
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+    <div>
+        <th:block th:replace="Admin/management::aside"></th:block>
+    </div>
+    <div class="body-wrapper">
+        <div>
+            <th:block th:replace="Admin/management::header"></th:block>
+        </div>
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container">
+                            <h1>Sửa Banner</h1>
+                            <form th:action="@{/banners/save}" th:object="${banner}" method="post" enctype="multipart/form-data">
+                                <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+                                    <p th:text="${errorMessage}"></p>
+                                </div>
+                                <input type="hidden" th:field="*{id}"/>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Tên Banner:</label>
+                                    <input type="text" id="name" th:field="*{name}" class="form-control" required/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="position" class="form-label">Vị trí:</label>
+                                    <select id="position" th:field="*{position}" class="form-control">
+                                        <option value="top" th:selected="${banner.position == 'top'}">Top</option>
+                                        <option value="bottom" th:selected="${banner.position == 'bottom'}">Bottom
+                                        </option>
+                                        <option value="sidebar" th:selected="${banner.position == 'sidebar'}">Sidebar
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="imageUrl" class="form-label">URL Hình Ảnh:</label>
+                                    <input type="text" id="imageUrl" th:field="*{imageUrl}" class="form-control" placeholder="Nhập URL hình ảnh" />
+
+                                    <label for="imageFile" class="form-label mt-3">Hoặc chọn file từ máy:</label>
+                                    <input type="file" id="imageFile" name="imageFile" class="form-control" accept="image/*" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="redirectUrl" class="form-label">URL Chuyển Hướng:</label>
+                                    <input type="url" id="redirectUrl" th:field="*{redirectUrl}" class="form-control"
+                                           required/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="isActive" class="form-label">Hoạt Động:</label>
+                                    <input type="checkbox" id="isActive" th:field="*{isActive}"
+                                           class="form-check-input"/>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-success">Lưu Thay Đổi</button>
+                                    <a href="/banners" class="btn btn-secondary">Trở Về</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/sidebarmenu.js"></script>
+<script src="/assets/js/app.min.js"></script>
+<script src="/assets/libs/simplebar/dist/simplebar.js"></script>
+</body>
+</html>

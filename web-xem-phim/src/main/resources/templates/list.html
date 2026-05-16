@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modernize Free</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png"/>
+    <link rel="stylesheet" href="/assets/css/styles.min.css"/>
+</head>
+
+<body>
+<!--  Body Wrapper -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+    <div>
+        <th:block th:replace="Admin/management::aside"></th:block>
+    </div>
+    <div class="body-wrapper">
+        <div>
+            <th:block th:replace="Admin/management::header"></th:block>
+        </div>
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-body">
+
+
+                        <!-- ***** Banner End ***** -->
+
+                        <!-- ***** Most Popular Start ***** -->
+                        <div class="most-popular">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="container my-5">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <!-- Nút Thêm Phim Mới -->
+                                                <div class="d-flex gap-2">
+                                                    <a href="/api" class="btn btn-success">Thêm Phim Mới</a>
+                                                    <button type="button" class="btn btn-primary" id="updateButton">Cập
+                                                        Nhật Tập Phim
+                                                    </button>
+
+                                                    <div id="loadingSpinner"
+                                                         style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 9999; align-items: center; justify-content: center;">
+                                                        <div class="spinner-border text-light" role="status"
+                                                             style="width: 3rem; height: 3rem;">
+                                                            <span class="sr-only">Loading...</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Form tìm kiếm -->
+                                                <form class="d-flex">
+                                                    <input type="text" id="searchText" name="keyword"
+                                                           class="form-control me-2"
+                                                           placeholder="Tìm kiếm phim..." aria-label="Search">
+                                                    <button type="button" class="btn btn-primary" id="searchButton"><i
+                                                            class="ti ti-search"></i></button>
+                                                </form>
+                                            </div>
+                                            <table class="table table-striped table-hover">
+                                                <thead class="table-dark">
+                                                <tr>
+                                                    <th scope="col">Thông tin</th>
+                                                    <th scope="col">Poster</th>
+                                                    <th scope="col">Thể loại</th>
+                                                    <th scope="col">Quốc gia</th>
+                                                    <th scope="col">Các tập</th>
+                                                    <th scope="col">Hành động</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="movieTableBody">
+                                                <!-- Nội dung sẽ được tạo động -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Phân trang -->
+                            <div id="pagination" class="d-flex justify-content-center mt-4"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editMovieModal" tabindex="-1" aria-labelledby="editMovieModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editMovieModalLabel">Sửa Phim</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editMovieForm">
+                    <input type="hidden" id="movieId">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="title" class="form-label">Tên phim:</label>
+                            <input type="text" id="title" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">Tên phim gốc:</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="slug" class="form-label">Đường dẫn:</label>
+                            <input type="text" id="slug" class="form-control" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="description" class="form-label">Chi tiết phim:</label>
+                            <textarea id="description" class="form-control" required></textarea>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="releaseYear" class="form-label">Năm phát hành:</label>
+                            <input type="number" id="releaseYear" class="form-control" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="director" class="form-label">Đạo diễn:</label>
+                            <input type="text" id="director" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="totalEpisodes" class="form-label">Số lượng tập:</label>
+                            <input type="number" id="totalEpisodes" class="form-control" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="duration" class="form-label">Thời lượng (phút):</label>
+                            <input type="number" id="duration" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="trailerUrl" class="form-label">Trailer URL:</label>
+                            <input type="text" id="trailerUrl" class="form-control">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="posterUrl" class="form-label">Poster URL:</label>
+                            <input type="text" id="posterUrl" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="backgroundUrl" class="form-label">Thumb URL:</label>
+                            <input type="text" id="backgroundUrl" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="isSeries" class="form-label">Danh mục:</label>
+                            <select id="isSeries" class="form-select">
+                                <option value="true">Phim Bộ</option>
+                                <option value="false">Phim Lẻ</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="country" class="form-label">Quốc gia:</label>
+                            <select id="country" class="form-select" required></select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="status" class="form-label">Trạng thái:</label>
+                            <select id="status" class="form-select" required>
+                                <option value="Sắp Chiếu">Sắp Chiếu</option>
+                                <option value="Đang Chiếu">Đang Chiếu</option>
+                                <option value="Hoàn Tất">Hoàn Tất</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="actorSearch" class="form-label">Diễn viên:</label>
+                            <!-- Hiển thị diễn viên đã chọn -->
+                            <div id="selectedActors" class="mb-2"></div>
+                            <!-- Ô tìm kiếm cho diễn viên -->
+                            <input type="text" id="actorSearch" class="form-control mb-2" placeholder="Tìm diễn viên...">
+                            <!-- Danh sách checkbox cho diễn viên -->
+                            <div id="actorList" class="border p-2" style="max-height: 150px; overflow-y: auto;"></div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="genreSearch" class="form-label">Thể loại:</label>
+                            <!-- Hiển thị thể loại đã chọn -->
+                            <div id="selectedGenres" class="mb-2"></div>
+                            <!-- Ô tìm kiếm cho thể loại -->
+                            <input type="text" id="genreSearch" class="form-control mb-2" placeholder="Tìm thể loại...">
+                            <!-- Danh sách checkbox cho thể loại -->
+                            <div id="genreList" class="border p-2" style="max-height: 150px; overflow-y: auto;"></div>
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="saveMovie">Lưu Thay Đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/sidebarmenu.js"></script>
+<script src="/assets/js/app.min.js"></script>
+<script src="/assets/libs/simplebar/dist/simplebar.js"></script>
+
+
+<script>
+    function toggleDropdown(movieId) {
+    var episodeList = document.getElementById('episodes-' + movieId);
+    var currentDisplay = episodeList.style.display;
+
+    if (currentDisplay === 'none' || currentDisplay === '') {
+        episodeList.style.display = 'block';
+    } else {
+        episodeList.style.display = 'none';
+    }
+}
+$(document).ready(function () {
+    const apiUrl = "/api/movies";
+
+    // Hàm lấy danh sách phim
+    function fetchMovies(page = 0, keyword = "") {
+        $.ajax({
+            url: apiUrl,
+            type: "GET",
+            data: {
+                page: page,
+                size: 8,
+                keyword: keyword,
+            },
+            success: function (response) {
+                displayMovies(response.movies);
+                displayPagination(response.currentPage, response.totalPages, keyword);
+            },
+            error: function (error) {
+                console.error("Error fetching movies:", error);
+            },
+        });
+    }
+
+    // Hàm hiển thị danh sách phim
+    function displayMovies(movies) {
+    const movieTableBody = $("#movieTableBody");
+    movieTableBody.empty(); // Xóa dữ liệu cũ
+
+    if (movies.length === 0) {
+        movieTableBody.append('<tr><td colspan="6" class="text-center">Không có phim nào để hiển thị.</td></tr>');
+        return;
+    }
+
+   movies.forEach((movie) => {
+        const genres = movie.genres && movie.genres.length > 0
+            ? movie.genres.map((genre) => `<li>- ${genre.genreName}</li>`).join("")
+            : "Không rõ";
+
+        const country = movie.country ? movie.country.countryName : "Không rõ";
+
+        const episodes = movie.isSeries
+            ? `<span class="badge bg-success">Tập ${movie.episodes.length > 0 ? movie.episodes[movie.episodes.length - 1].episodeNumber : "??"} / ${movie.totalEpisodes || "??"}</span>`
+            : `<span class="badge bg-info">${movie.status || "Không rõ"}</span>`;
+
+        const episodeDropdown = movie.isSeries && movie.episodes.length > 0
+            ? `
+                <div class="dropdown">
+                    <button style="width:80px" class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Xem Tập
+                    </button>
+                    <ul class="dropdown-menu" style="max-height: 300px; overflow-y: auto;">
+                        ${movie.episodes.map(episode => `
+                            <li class="d-flex justify-content-between align-items-center">
+                                <a class="dropdown-item" href="/episodes/detail/${episode.episodeId}">Tập ${episode.episodeNumber}</a>
+                                <button class="btn btn-danger btn-sm ms-2 delete-episode" data-id="${episode.episodeId}">Xóa</button>
+                            </li>
+                        `).join("")}
+                    </ul>
+                </div>
+            `
+            : "";
+
+        const movieRow = `
+            <tr>
+                <td>
+                    <div>
+                        <div class="movie-details">
+                            <div class="movie-title">
+                                <span class="text-primary d-inline">${movie.title || "Không rõ tiêu đề"}</span>
+                                <span class="text-success d-inline"> [${movie.releaseYear || "??"}]</span>
+                            </div>
+                            <div class="text-muted pb-2">
+                                <small>${movie.name || "Không rõ tên gốc"}</small>
+                            </div>
+                        </div>
+                        <div class="badge bg-secondary font-weight-normal">
+                            ${movie.isSeries ? "Phim bộ" : "Phim lẻ"}
+                        </div>
+                        ${episodes}
+                    </div>
+                </td>
+                <td>
+                    <img src="${movie.posterUrl || 'https://via.placeholder.com/100'}" alt="Poster" class="img-fluid" width="100">
+                </td>
+                <td>
+                    <ul class="genre-list">${genres}</ul>
+                </td>
+                <td>
+                    <div class="font-weight-normal">${country}</div>
+                </td>
+                <td>
+                    <a style="width:80px" class="btn btn-secondary btn-sm" href="/episodes/add?movieId=${movie.movieId}">Thêm Tập</a>
+                    ${episodeDropdown}
+                </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-primary btn-sm edit-movie" data-id="${movie.movieId}">Sửa</button>
+                        <button class="btn btn-danger btn-sm delete-movie" data-id="${movie.movieId}">Xóa</button>
+                        <a class="btn btn-info btn-sm" href="/movies/detail/${movie.movieId}">Xem</a>
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        movieTableBody.append(movieRow);
+    });
+}
+$(document).on("click", ".edit-movie", function () {
+    const movieId = $(this).data("id");
+
+    $.ajax({
+        url: `/api/edit/${movieId}`, // API GET lấy thông tin phim
+        type: "GET",
+        success: function (data) {
+            const movie = data.movie;
+            const countries = data.allCountries;
+            const genres = data.allGenres;
+            const selectedGenres = data.selectedGenreIds;
+            const actors = data.allActors;
+            const selectedActors = data.selectedActorIds;
+
+            // Điền thông tin phim vào form
+            $("#movieId").val(movie.movieId);
+            $("#title").val(movie.title);
+            $("#name").val(movie.name);
+            $("#slug").val(movie.slug);
+            $("#description").val(movie.description);
+            $("#releaseYear").val(movie.releaseYear);
+            $("#director").val(movie.director);
+            $("#totalEpisodes").val(movie.totalEpisodes);
+            $("#duration").val(movie.duration);
+            $("#trailerUrl").val(movie.trailerUrl);
+            $("#posterUrl").val(movie.posterUrl);
+            $("#backgroundUrl").val(movie.backgroundUrl);
+            $("#isSeries").val(movie.isSeries ? "true" : "false");
+            $("#status").val(movie.status);
+
+            // Điền danh sách quốc gia
+            $("#country").empty();
+            countries.forEach(country => {
+                const selected = country.countryId === movie.country.countryId ? "selected" : "";
+                $("#country").append(`<option value="${country.countryId}" ${selected}>${country.countryName}</option>`);
+            });
+
+            // Hiển thị danh sách thể loại
+            $("#genreList").empty(); // Xóa dữ liệu cũ
+            genres.forEach(genre => {
+                const isChecked = selectedGenres.includes(genre.genreId) ? "checked" : "";
+                $("#genreList").append(`
+                    <label class="form-check">
+                        <input type="checkbox" class="form-check-input genre-checkbox" value="${genre.genreId}" ${isChecked}>
+                        ${genre.genreName}
+                    </label>
+                `);
+            });
+
+            // Hiển thị danh sách diễn viên
+            $("#actorList").empty(); // Xóa dữ liệu cũ
+            actors.forEach(actor => {
+                const isChecked = selectedActors.includes(actor.actorId) ? "checked" : "";
+                $("#actorList").append(`
+                    <label class="form-check">
+                        <input type="checkbox" class="form-check-input actor-checkbox" value="${actor.actorId}" ${isChecked}>
+                        ${actor.actorName}
+                    </label>
+                `);
+            });
+
+            // Hiển thị modal sửa phim
+            $("#editMovieModal").modal("show");
+        },
+        error: function (error) {
+            console.error("Error fetching movie details:", error);
+            alert("Không thể tải thông tin phim.");
+        },
+    });
+});
+
+
+$("#saveMovie").on("click", function () {
+    const movieId = $("#movieId").val();
+    const updatedData = {
+        title: $("#title").val(),
+        name: $("#name").val(),
+        slug: $("#slug").val(),
+        description: $("#description").val(),
+        releaseYear: parseInt($("#releaseYear").val()),
+        director: $("#director").val(),
+        totalEpisodes: ($("#totalEpisodes").val()),
+        duration: parseInt($("#duration").val()),
+        trailerUrl: $("#trailerUrl").val(),
+        posterUrl: $("#posterUrl").val(),
+        backgroundUrl: $("#backgroundUrl").val(),
+        isSeries: $("#isSeries").val() === "true",
+        countryId: parseInt($("#country").val()),
+        status: $("#status").val(),
+        genreIds: Array.from($(".genre-checkbox:checked")).map(checkbox => parseInt($(checkbox).val())),
+        actorIds: Array.from($(".actor-checkbox:checked")).map(checkbox => parseInt($(checkbox).val())),
+    };
+
+    $.ajax({
+        url: `/api/edit/${movieId}`,
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify(updatedData),
+        success: function (response) {
+            alert(response); // Hiển thị thông báo thành công
+            $("#editMovieModal").modal("hide");
+            fetchMovies(); // Tải lại danh sách phim
+        },
+        error: function (error) {
+            console.error("Error updating movie:", error);
+            alert("Đã xảy ra lỗi khi cập nhật phim.");
+        },
+    });
+});
+
+
+$(document).on("click", ".delete-movie", function () {
+    const movieId = $(this).data("id");
+
+    if (confirm("Bạn có chắc chắn muốn xóa không?")) {
+        $.ajax({
+            url: `/api/delete/${movieId}`, // Gọi API xóa
+            type: "DELETE",
+            success: function (response) {
+                alert(response); // Hiển thị thông báo thành công
+                fetchMovies();  // Tải lại danh sách phim
+            },
+            error: function (error) {
+                console.error("Error deleting movie:", error);
+                alert("Có lỗi xảy ra khi xóa phim.");
+            },
+        });
+    }
+});
+
+$(document).ready(function () {
+    $("#updateButton").on("click", function () {
+        if (confirm("Bạn có chắc chắn muốn cập nhật tập phim?")) {
+            // Hiển thị hiệu ứng tải
+            $("#loadingSpinner").fadeIn();
+
+            $.ajax({
+                url: "/api/update-episodes", // Endpoint API
+                type: "POST",
+               success: function (response) {
+                    alert(response); // Hiển thị thông báo thành công
+                    fetchMovies(); // Gọi lại API để làm mới danh sách phim
+                },
+                error: function (error) {
+                    console.error("Error updating episodes:", error);
+                    alert("Đã xảy ra lỗi khi cập nhật tập phim.");
+                },
+                complete: function () {
+                    // Ẩn hiệu ứng tải sau khi quá trình hoàn tất
+                    $("#loadingSpinner").fadeOut();
+                }
+            });
+        }
+    });
+});
+$(document).on("click", ".delete-episode", function () {
+    const episodeId = $(this).data("id");
+    if (confirm("Bạn có chắc chắn muốn xóa tập này?")) {
+        $.ajax({
+            url: `/api/episodes/delete/${episodeId}`,
+            type: "DELETE",
+            success: function (response) {
+                alert(response); // Hiển thị thông báo thành công
+                fetchMovies(); // Tải lại danh sách phim
+            },
+            error: function (error) {
+                console.error("Error deleting episode:", error);
+                alert("Đã xảy ra lỗi khi xóa tập.");
+            },
+        });
+    }
+});
+
+
+   function displayPagination(currentPage, totalPages, keyword = "") {
+    const pagination = $("#pagination");
+    pagination.empty();
+
+    if (totalPages <= 1) {
+        return; // Không cần hiển thị phân trang nếu chỉ có 1 trang
+    }
+
+    // Thêm nút "Trước"
+    const prevDisabled = currentPage === 0 ? "disabled" : "";
+    pagination.append(`
+        <button class="btn btn-secondary ${prevDisabled}" data-page="${currentPage - 1}" data-keyword="${keyword}">
+            Trước
+        </button>
+    `);
+
+    // Hiển thị số trang
+    const maxPagesToShow = 5;
+    const startPage = Math.max(0, currentPage - Math.floor(maxPagesToShow / 2));
+    const endPage = Math.min(totalPages - 1, startPage + maxPagesToShow - 1);
+
+    if (startPage > 0) {
+        pagination.append(`
+            <button class="btn btn-secondary" data-page="0" data-keyword="${keyword}">1</button>
+            ${startPage > 1 ? '<span class="dots">...</span>' : ''}
+        `);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+        const activeClass = i === currentPage ? "active" : "";
+        pagination.append(`
+            <button class="btn btn-secondary ${activeClass}" data-page="${i}" data-keyword="${keyword}">${i + 1}</button>
+        `);
+    }
+
+    if (endPage < totalPages - 1) {
+        pagination.append(`
+            ${endPage < totalPages - 2 ? '<span class="dots">...</span>' : ''}
+            <button class="btn btn-secondary" data-page="${totalPages - 1}" data-keyword="${keyword}">${totalPages}</button>
+        `);
+    }
+
+    // Thêm nút "Sau"
+    const nextDisabled = currentPage === totalPages - 1 ? "disabled" : "";
+    pagination.append(`
+        <button class="btn btn-secondary ${nextDisabled}" data-page="${currentPage + 1}" data-keyword="${keyword}">
+            Sau
+        </button>
+    `);
+}
+
+
+    // Sự kiện lọc và tìm kiếm
+    $("#searchButton").on("click", function () {
+        const keyword = $("#searchText").val();
+        fetchMovies(0, keyword);
+    });
+
+    // Sự kiện phân trang
+    $("#pagination").on("click", ".btn", function () {
+        const page = $(this).data("page");
+        const keyword = $(this).data("keyword");
+        fetchMovies(page, keyword);
+    });
+
+    // Tải dữ liệu ban đầu
+    fetchMovies();
+});
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function () {
+     // Hiển thị danh sách diễn viên và thể loại đã chọn
+     function updateSelectedActors() {
+         const selectedActors = $(".actor-checkbox:checked").map(function () {
+             return $(this).data("name");
+         }).get();
+         $("#selectedActors").html(selectedActors.join(", ") || "Chưa chọn diễn viên nào");
+     }
+
+     function updateSelectedGenres() {
+         const selectedGenres = $(".genre-checkbox:checked").map(function () {
+             return $(this).data("name");
+         }).get();
+         $("#selectedGenres").html(selectedGenres.join(", ") || "Chưa chọn thể loại nào");
+     }
+
+     // Tìm kiếm diễn viên
+     $("#actorSearch").on("input", function () {
+         const searchValue = $(this).val().toLowerCase();
+         $("#actorList label").each(function () {
+             const actorName = $(this).text().toLowerCase();
+             $(this).toggle(actorName.includes(searchValue));
+         });
+     });
+
+     // Tìm kiếm thể loại
+     $("#genreSearch").on("input", function () {
+         const searchValue = $(this).val().toLowerCase();
+         $("#genreList label").each(function () {
+             const genreName = $(this).text().toLowerCase();
+             $(this).toggle(genreName.includes(searchValue));
+         });
+     });
+
+     // Cập nhật danh sách đã chọn khi click vào checkbox
+     $(document).on("change", ".actor-checkbox", updateSelectedActors);
+     $(document).on("change", ".genre-checkbox", updateSelectedGenres);
+
+     // Khi mở modal, hiển thị các giá trị đã chọn
+     $(document).on("click", ".edit-movie", function () {
+         updateSelectedActors();
+         updateSelectedGenres();
+     });
+ });
+
+</script>
+</body>
+</html>

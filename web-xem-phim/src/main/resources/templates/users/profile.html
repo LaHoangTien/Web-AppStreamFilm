@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <title>Cyborg - Awesome HTML5 Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="/assets/css/owl.css">
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+    <!--
+
+    TemplateMo 579 Cyborg Gaming
+
+    https://templatemo.com/tm-579-cyborg-gaming
+
+    -->
+</head>
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header Area Start ***** -->
+<div>
+    <th:block th:replace="Home/Home::header"></th:block>
+</div>
+<!-- ***** Header Area End ***** -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<div>
+    <th:block th:replace="Home/Home::banner-bottom"></th:block>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-content">
+                <div th:each="banner : ${topBanners}" class="col-12 mb-3">
+                    <a th:href="${banner.redirectUrl}" target="_blank">
+                        <img style="border-radius: 23px" th:src="${banner.imageUrl}" class="img-fluid" alt="Banner" />
+                    </a>
+                </div>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/"><i class="bi bi-house-door-fill"></i>Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Thông tin cá nhân</li>
+                    </ol>
+                </nav>
+                <!-- ***** Banner Start ***** -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="main-profile">
+                            <div class="row">
+                                <div class="col-lg-4 text-center">
+                                    <div class="profile-image-container">
+                                        <!-- Kiểm tra nếu user.profileImage có giá trị -->
+                                        <img th:if="${user.profileImage != null && user.profileImage != ''}"
+                                             th:src="@{/profile_images/{filename}(filename=${user.profileImage})}"
+                                             alt="Profile Image" class="profile-image">
+                                        <!-- Nếu không có ảnh, hiển thị ảnh mặc định -->
+                                        <img th:if="${user.profileImage == null || user.profileImage == ''}"
+                                             th:src="@{/profile_images/avatardefault.png}"
+                                             alt="Default Profile Image" class="profile-image">
+                                    </div>
+
+
+                                    <div style="margin-top: 10px" class="profile-info-list ">
+                                        <ul class="profile-info-list ">
+                                            <li>
+                                                <label>Tài khoản:</label>
+                                                <span th:text="${user.username}"></span>
+                                            </li>
+                                            <li>
+                                                <label>Email:</label>
+                                                <span th:text="${user.email}"></span>
+                                            </li>
+                                            <li>
+                                                <label>Tham gia ngày:</label>
+                                                <span th:text="${user.createdAt}"></span>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 align-self-center">
+                                    <form th:action="@{/profile/update}" method="post" enctype="multipart/form-data" th:object="${updateUserDTO}">
+                                        <ul class="profile-info-list">
+                                            <!-- Họ và tên -->
+                                            <li class="col-md-4">
+                                                <label for="fullName">Họ và Tên:</label>
+                                                <input type="text" id="fullName" name="fullName" th:field="*{fullName}" required>
+                                            </li>
+
+                                            <!-- Mật khẩu hiện tại -->
+                                            <li class="col-md-4" style="position: relative;">
+                                                <label for="currentPassword">Mật khẩu hiện tại: (bỏ trống nếu không muốn đổi)</label>
+                                                <input type="password" id="currentPassword" th:field="*{currentPassword}" placeholder="Nhập lại mật khẩu hiện tại" style="padding-right: 40px;">
+                                                <!-- Icon -->
+                                                <i id="toggleCurrentPassword" class="fa fa-eye" style="position: absolute; top: 70%; right: 10px; transform: translateY(-50%); cursor: pointer; color: #6c757d;"></i>
+                                            </li>
+
+                                            <li class="col-md-4" style="position: relative;">
+                                                <label for="newPassword">Mật khẩu mới: (bỏ trống nếu không muốn đổi)</label>
+                                                <input type="password" id="newPassword" th:field="*{newPassword}" placeholder="Nhập mật khẩu mới" style="padding-right: 40px;">
+                                                <!-- Icon -->
+                                                <i id="toggleNewPassword" class="fa fa-eye" style="position: absolute; top: 70%; right: 10px; transform: translateY(-50%); cursor: pointer; color: #6c757d;"></i>
+                                            </li>
+
+                                            <li class="col-md-4" style="position: relative;">
+                                                <label for="confirmPassword">Xác nhận mật khẩu mới: (bỏ trống nếu không muốn đổi)</label>
+                                                <input type="password" id="confirmPassword" th:field="*{confirmPassword}" placeholder="Nhập lại mật khẩu mới" style="padding-right: 40px;">
+                                                <!-- Icon -->
+                                                <i id="toggleConfirmPassword" class="fa fa-eye" style="position: absolute; top: 70%; right: 10px; transform: translateY(-50%); cursor: pointer; color: #6c757d;"></i>
+                                            </li>
+
+
+                                            <li class="col-8">
+                                                <label for="profileImage">Cập nhật Hình Ảnh:</label>
+                                                <input type="file" id="profileImage" name="profileImage" th:field="*{profileImage}" accept="image/*">
+                                            </li>
+
+                                        </ul>
+
+                                        <!-- Nút cập nhật thông tin -->
+                                        <div class="main-button">
+                                            <button type="submit">Cập Nhật Thông Tin</button>
+                                        </div>
+                                    </form>
+                                    <div th:if="${error}" style="color: red;">
+                                        <p th:text="${error}"></p>
+                                    </div>
+
+                                    <!-- Hiển thị thông báo thành công nếu có -->
+                                    <div th:if="${message}" style="color: green;">
+                                        <p th:text="${message}"></p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" th:if="${#lists.size(historyList) > 0}">
+                        <div class="col-lg-12">
+                            <div class="most-popular">
+                                <div class="heading-section">
+                                    <h4><em>Lịch sử</em> Xem Phim</h4>
+                                </div>
+                                <div class="container" style="max-height: 830px; overflow-y: auto;"
+                                     id="historyContainer">
+                                    <div class="row"  style="margin-top: 10px">
+                                        <!-- Duyệt qua danh sách lịch sử xem phim -->
+                                        <div class="col-lg-3 col-sm-6 history-item" th:each="history : ${historyList}">
+                                            <div class="item text-center">
+                                                <!-- Liên kết đến trang phim (phân biệt phim bộ và phim chiếu rạp) -->
+                                                <a class="movie-link"
+                                                   th:href="${history.movie.isSeries} ? @{/phimbo/{slug}(slug=${history.movie.slug})} : @{/phimle/{slug}(slug=${history.movie.slug})}">
+                                                    <div class="poster-container">
+                                                        <!-- Ảnh Poster của phim -->
+                                                        <img th:src="@{${history.movie.posterUrl}}" alt="Movie Poster"
+                                                             class="movie-poster">
+                                                    </div>
+                                                    <!-- Tên phim -->
+                                                    <h4 class="movie-title" th:text="${history.movie.title}"></h4>
+                                                    <span class="movie-name"
+                                                          th:text="'Đã xem vào ' + ${#dates.format(history.watchedAt, 'HH:mm')} + ' ' + ${#dates.format(history.watchedAt, 'd/MM/yyyy')}"></span>
+                                                </a>
+                                                <!-- Trạng thái phim -->
+                                                <span class="status-badge" th:text="${history.movie.status}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" th:if="${#lists.size(favoritesList) > 0}">
+                        <div class="col-lg-12">
+                            <div class="most-popular">
+                                <div class="heading-section">
+                                    <h4><em>Tủ Phim</em> Yêu Thích</h4>
+                                </div>
+                                <div class="container" style="max-height: 830px; overflow-y: auto;"
+                                     id="favoritesContainer">
+                                    <!-- Duyệt qua danh sách phim yêu thích -->
+                                        <div class="row"  style="margin-top: 10px">
+
+                                        <div class="col-lg-3 col-sm-6 favorite-item"
+                                             th:each="favorite : ${favoritesList}">
+                                            <div class="item text-center">
+                                                <a class="movie-link"
+                                                   th:href="${favorite.movie.isSeries} ? @{/phimbo/{slug}(slug=${favorite.movie.slug})} : @{/phimle/{slug}(slug=${favorite.movie.slug})}">
+                                                    <div class="poster-container">
+                                                        <img th:src="@{${favorite.movie.posterUrl}}" alt="Movie Poster"
+                                                             class="movie-poster">
+                                                    </div>
+                                                    <h4 class="movie-title" th:text="${favorite.movie.title}"></h4>
+                                                </a>
+                                                <form th:action="@{/favorites/remove}" method="post"
+                                                      class="remove-form">
+                                                    <input type="hidden" th:value="${favorite.favoriteId}"
+                                                           name="favoriteId"/>
+                                                    <button type="submit" class="remove-button">X</button>
+                                                </form>
+                                                <span class="status-badge" th:text="${favorite.movie.status}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <th:block th:replace="Home/Home::footer"></th:block>
+</div>
+<style>
+    .profile-image-container {
+    width: 200px; /* Chiều rộng của ảnh (tăng kích thước) */
+    height: 200px; /* Chiều cao của ảnh (tăng kích thước) */
+    overflow: hidden; /* Ẩn phần vượt quá */
+    border-radius: 10px; /* Bo tròn góc (thay vì hình tròn) */
+    margin: 0 auto; /* Can giữa ảnh */
+    display: flex; /* Sử dụng Flexbox để căn giữa nội dung */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    background-color: #f8f9fa; /* Màu nền cho vùng chứa ảnh */
+    border: 1px solid #ccc; /* Viền cho vùng chứa ảnh */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ cho vùng chứa ảnh */
+}
+[type="file"] {
+/* Style the color of the message that says 'No file chosen' */
+  color: #878787;
+}
+[type="file"]::-webkit-file-upload-button {
+  background: #e75e8d;
+  border: 2px solid #e75e8d;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  outline: none;
+  padding: 10px 25px;
+  text-transform: uppercase;
+  transition: all 1s ease;
+}
+
+[type="file"]::-webkit-file-upload-button:hover {
+  background: #fff;
+  border: 2px solid #535353;
+  color: #e75e8d;
+}
+
+/* GENERAL STYLING OF PAGE — NOT APPLICABLE TO EXAMPLE */
+body {
+  padding: 20px;
+}
+.profile-image {
+    width: 100%; /* Đảm bảo ảnh lấp đầy container */
+    height: 100%; /* Đảm bảo ảnh lấp đầy container */
+    object-fit: cover; /* Cắt ảnh theo tỷ lệ */
+    display: block; /* Đảm bảo ảnh là khối */
+}
+
+
+.profile-info-list {
+    list-style-type: none; /* Bỏ dấu đầu dòng cho danh sách */
+    padding: 0; /* Bỏ padding cho danh sách */
+}
+
+
+.profile-info-list label {
+    display: block; /* Đặt label thành khối */
+    margin-bottom: 5px; /* Khoảng cách dưới label */
+}
+
+.profile-info-list input {
+    background-color: transparent; /* Ẩn màu nền của input */
+    color: white; /* Màu chữ nhập liệu là trắng */
+    width: 100%; /* Đảm bảo input lấp đầy không gian */
+    padding: 10px; /* Padding cho input */
+    border: none; /* Ẩn viền của input */
+    border-radius: 5px; /* Bo tròn góc cho input */
+    box-shadow: none; /* Loại bỏ bóng cho input */
+    transition: all 0.3s; /* Hiệu ứng chuyển đổi cho tất cả thuộc tính */
+}
+
+.profile-info-list input:focus {
+    border: none; /* Giữ viền ẩn khi focus */
+    box-shadow: none; /* Giữ bóng ẩn khi focus */
+    outline: none; /* Loại bỏ outline mặc định khi focus */
+}
+
+
+
+
+
+    . container {
+        max-height: 400px; /* Chiều cao tối đa cho vùng lịch sử */
+        overflow-y: auto; /* Hiển thị thanh cuộn dọc khi nội dung vượt quá chiều cao tối đa */
+        padding-right: 15px; /* Đảm bảo thanh cuộn không bị che bởi nội dung */
+        border: none; /* Ẩn viền */
+    }
+      /* Tùy chỉnh thanh cuộn */
+    .container::-webkit-scrollbar {
+        width: 8px; /* Độ rộng của thanh cuộn */
+    }
+
+    .container::-webkit-scrollbar-thumb {
+        background: #888; /* Màu sắc cho thanh cuộn */
+        border-radius: 4px; /* Bo tròn góc */
+    }
+
+    .container::-webkit-scrollbar-thumb:hover {
+        background: #555; /* Màu sắc cho thanh cuộn khi hover */
+    }
+
+    .container::-webkit-scrollbar-track {
+        background: transparent; /* Ẩn nền của thanh cuộn */
+    }
+    .main-button {
+    display: flex; /* Sử dụng Flexbox */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    margin-top: 20px; /* Khoảng cách từ phần trên để nút không bị dính vào các input */
+}
+
+</style>
+<script>
+    const historyContainer = document.getElementById('historyContainer');
+    const favoritesContainer = document.getElementById('favoritesContainer');
+
+    function addScrollInteraction(container) {
+        let isDown = false;
+        let startY;
+        let scrollTop;
+
+        container.addEventListener('mousedown', (e) => {
+            isDown = true;
+            container.style.cursor = 'grabbing';
+            startY = e.pageY - container.offsetTop;
+            scrollTop = container.scrollTop;
+        });
+
+        container.addEventListener('mouseleave', () => {
+            isDown = false;
+            container.style.cursor = 'grab';
+        });
+
+        container.addEventListener('mouseup', () => {
+            isDown = false;
+            container.style.cursor = 'grab';
+        });
+
+        container.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const y = e.pageY - container.offsetTop;
+            const walk = (y - startY) * 2; // Tốc độ cuộn
+            container.scrollTop = scrollTop - walk;
+        });
+    }
+
+    // Áp dụng chức năng cuộn cho cả hai container
+    addScrollInteraction(historyContainer);
+    addScrollInteraction(favoritesContainer);
+
+    // Hàm chuyển đổi giữa ẩn/hiện mật khẩu
+function togglePassword(inputId, iconId) {
+    const input = document.getElementById(inputId);
+    const icon = document.getElementById(iconId);
+
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        input.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+}
+
+// Gắn sự kiện cho từng trường
+document.getElementById('toggleCurrentPassword').addEventListener('click', function () {
+    togglePassword('currentPassword', 'toggleCurrentPassword');
+});
+
+document.getElementById('toggleNewPassword').addEventListener('click', function () {
+    togglePassword('newPassword', 'toggleNewPassword');
+});
+
+document.getElementById('toggleConfirmPassword').addEventListener('click', function () {
+    togglePassword('confirmPassword', 'toggleConfirmPassword');
+});
+
+</script>
+
+<script>
+    function showMoreFavorites() {
+        // Hiện phần nội dung ẩn
+        const hiddenItems = document.querySelectorAll('#favoritesContainer .col-lg-3:nth-child(n+5)');
+        hiddenItems.forEach(item => {
+            item.style.display = 'block'; // Thay đổi thành 'block' để hiện
+        });
+        document.getElementById('showMore').style.display = 'none'; // Ẩn nút "Xem Thêm"
+        document.getElementById('collapse').style.display = 'inline-block'; // Hiện nút "Thu Gọn"
+    }
+
+    function collapseFavorites() {
+        // Ẩn các phần nội dung mở rộng
+        const expandedItems = document.querySelectorAll('#favoritesContainer .col-lg-3:nth-child(n+5)');
+        expandedItems.forEach(item => {
+            item.style.display = 'none'; // Thay đổi thành 'none' để ẩn
+        });
+        document.getElementById('showMore').style.display = 'inline-block'; // Hiện nút "Xem Thêm"
+        document.getElementById('collapse').style.display = 'none'; // Ẩn nút "Thu Gọn"
+    }
+</script>
+<!-- Scripts -->
+<!-- Bootstrap core JavaScript -->
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="/assets/js/isotope.min.js"></script>
+<script src="/assets/js/owl-carousel.js"></script>
+<script src="/assets/js/tabs.js"></script>
+<script src="/assets/js/popup.js"></script>
+<script src="/assets/js/custom.js"></script>
+
+
+</body>
+
+</html>

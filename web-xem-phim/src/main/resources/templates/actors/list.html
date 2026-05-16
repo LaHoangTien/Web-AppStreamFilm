@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modernize Free</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png"/>
+    <link rel="stylesheet" href="/assets/css/styles.min.css"/>
+</head>
+
+<body>
+<!--  Body Wrapper -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+    <div>
+        <th:block th:replace="Admin/management::aside"></th:block>
+    </div>
+    <div class="body-wrapper">
+        <div>
+            <th:block th:replace="Admin/management::header"></th:block>
+        </div>
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-12">
+                            <h1 class="mb-4">Danh Sách Diễn Viên</h1>
+                            <form action="/actors" method="get" class="d-flex mb-3">
+                                <input type="text" name="search" id="searchInput" placeholder="Tìm kiếm diễn viên..."
+                                       class="form-control" th:value="${search}">
+                                <button type="submit" class="btn btn-primary ms-2">Tìm kiếm</button>
+                            </form>
+                        </div>
+
+                        <a href="/actors/add" class="btn btn-success mb-3">Thêm Diễn Viên </a>
+                        <div>
+                            <p class="text-success" th:if="${param.success}">Diễn viên đã được thêm thành công!</p>
+                            <p class="text-danger" th:if="${param.error}">Có lỗi xảy ra, vui lòng thử lại!</p>
+                        </div>
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên</th>
+                                <th>Hành Động</th>
+                            </tr>
+                            </thead>
+                            <tbody id="actorTable">
+                            <tr th:each="actor : ${actorPage.content}">
+                                <td th:text="${actor.actorId}"></td>
+                                <td th:text="${actor.actorName}"></td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a th:href="@{/actors/edit/{id}(id=${actor.actorId})}"
+                                           class="btn btn-info btn-sm">Sửa</a>
+                                        <a th:href="@{/actors/delete/{id}(id=${actor.actorId})}"
+                                           class="btn btn-danger btn-sm"
+                                           onclick="return confirm('Bạn có chắc chắn muốn xóa không?');">Xóa</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <!-- Nút "Previous" -->
+                                <li th:if="${actorPage.hasPrevious()}" class="page-item">
+                                    <a th:href="@{/actors(page=${actorPage.number - 1})}" class="page-link">Previous</a>
+                                </li>
+
+                                <!-- Trang đầu tiên -->
+                                <li th:if="${actorPage.totalPages > 1}" class="page-item" th:classappend="${actorPage.number == 0} ? 'active'">
+                                    <a th:href="@{/actors(page=0)}" class="page-link">1</a>
+                                </li>
+
+                                <!-- Dấu ba chấm ở đầu -->
+                                <li th:if="${actorPage.number > 3}" class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+
+                                <!-- Các số trang gần trang hiện tại -->
+                                <li th:each="i : ${#numbers.sequence(actorPage.number - 2, actorPage.number + 2)}"
+                                    th:if="${i > 0 and i < actorPage.totalPages - 1}"
+                                    th:classappend="${i == actorPage.number} ? 'page-item active' : 'page-item'">
+                                    <a th:href="@{/actors(page=${i})}" class="page-link" th:text="${i + 1}"></a>
+                                </li>
+
+                                <!-- Dấu ba chấm ở cuối -->
+                                <li th:if="${actorPage.number < actorPage.totalPages - 4}" class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+
+                                <!-- Trang cuối cùng -->
+                                <li th:if="${actorPage.totalPages > 1}" class="page-item"
+                                    th:classappend="${actorPage.number == actorPage.totalPages - 1} ? 'active'">
+                                    <a th:href="@{/actors(page=${actorPage.totalPages - 1})}" class="page-link" th:text="${actorPage.totalPages}"></a>
+                                </li>
+
+                                <!-- Nút "Next" -->
+                                <li th:if="${actorPage.hasNext()}" class="page-item">
+                                    <a th:href="@{/actors(page=${actorPage.number + 1})}" class="page-link">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function filterActors() {
+        const searchValue = document.getElementById("searchInput").value.toLowerCase();
+        const tableRows = document.querySelectorAll("#actorTable tr");
+
+        tableRows.forEach(row => {
+            const actorName = row.cells[1].textContent.toLowerCase();
+            if (actorName.includes(searchValue)) {
+                row.style.display = ""; // Hiển thị hàng nếu khớp
+            } else {
+                row.style.display = "none"; // Ẩn hàng nếu không khớp
+            }
+        });
+    }
+</script>
+
+<script src="/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/sidebarmenu.js"></script>
+<script src="/assets/js/app.min.js"></script>
+<script src="/assets/libs/simplebar/dist/simplebar.js"></script>
+</body>
+</html>

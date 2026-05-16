@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modernize Free</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png"/>
+    <link rel="stylesheet" href="/assets/css/styles.min.css"/>
+</head>
+
+<body>
+<!--  Body Wrapper -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+    <div>
+        <th:block th:replace="Admin/management::aside"></th:block>
+    </div>
+    <div class="body-wrapper">
+        <div>
+            <th:block th:replace="Admin/management::header"></th:block>
+        </div>
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container my-5">
+                            <h1>Thêm tập cho phim "<span th:text="${movie.title}"></span>"</h1>
+                            <form class="row g-3" th:action="@{/episodes/add}" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="movieId" th:value="${movie.movieId}"/>
+
+                                <div class="col-md-6">
+                                    <label for="episodeNumber" class="form-label">Tập số</label>
+                                    <input type="text" class="form-control" id="episodeNumber" name="episodeNumber"
+                                           required/>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="title" class="form-label">Tiêu đề</label>
+                                    <input type="text" class="form-control" id="title" name="title"/>
+                                </div>
+
+
+                                <div class="md-3">
+                                    <label class="form-label" for="videoUrl">Video URL:</label>
+                                    <input class="form-control" type="text" id="videoUrl" name="videoUrl"/>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Add Episode</button>
+                                    <a th:href="@{/movies}" class="btn btn-secondary">Cancel</a>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="container mt-5">
+                            <h2>Thêm Tập Phim từ API</h2>
+                            <form th:action="@{/add-episodes}" method="post">
+                                <input type="hidden" name="movieId" th:value="${movie.movieId}"/>
+                                <div class="form-group">
+                                    <label for="apiUrl">Dán link API:</label>
+                                    <input type="text" class="form-control" id="apiUrl" name="apiUrl" placeholder="Nhập URL API" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Thêm Tập Phim</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/sidebarmenu.js"></script>
+<script src="/assets/js/app.min.js"></script>
+<script src="/assets/libs/simplebar/dist/simplebar.js"></script>
+</body>
+</html>

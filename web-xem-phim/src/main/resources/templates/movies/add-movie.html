@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modernize Free</title>
+    <link rel="shortcut icon" type="image/png" href="/assets/images/logos/favicon.png"/>
+    <link rel="stylesheet" href="/assets/css/styles.min.css"/>
+</head>
+
+<body>
+<!--  Body Wrapper -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+    <div>
+        <th:block th:replace="Admin/management::aside"></th:block>
+    </div>
+    <div class="body-wrapper">
+        <div>
+            <th:block th:replace="Admin/management::header"></th:block>
+        </div>
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container mt-5">
+                            <h1 class="mb-4">Thêm Phim</h1>
+                            <div class="form-group">
+                                <label for="apiUrl">API URL:</label>
+                                <input type="text" id="apiUrl" class="form-control" placeholder="Enter API URL">
+                                <button type="button" id="fetchApiData" class="btn btn-primary mt-2">Lấy dữ liệu</button>
+                            </div>
+
+                            <form th:action="@{/movies/add}" th:object="${movie}" method="post"
+                                  enctype="multipart/form-data" class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="title" class="form-label">Tên phim:</label>
+                                    <input type="text" id="title" th:field="*{title}" class="form-control" required/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="name" class="form-label">Tên phim gốc:</label>
+                                    <input type="text" id="name" th:field="*{name}" class="form-control" required/>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="name" class="form-label">Đường dẫn:</label>
+                                    <input type="text" id="slug" th:field="*{slug}" class="form-control" required/>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="description" class="form-label">Chi tiết phim:</label>
+                                    <textarea id="description" th:field="*{description}" class="form-control"
+                                              required></textarea>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="releaseYear" class="form-label">Năm phát hành:</label>
+                                    <input type="number" id="releaseYear" th:field="*{releaseYear}" class="form-control"
+                                           required/>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="director" class="form-label">Đạo diễn:</label>
+                                    <input type="text" id="director" th:field="*{director}" class="form-control"
+                                    />
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="totalEpisodes" class="form-label">Số lượng tập</label>
+                                    <input type="text" class="form-control" id="totalEpisodes" name="totalEpisodes"
+                                           th:value="${movie.totalEpisodes}" required/>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="duration" class="form-label">Thời lượng phim (phút):</label>
+                                    <input type="number" id="duration" th:field="*{duration}" class="form-control"
+                                           required/>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label" for="trailerUrl">Trailer URL:</label>
+                                    <input class="form-control" type="text" id="trailerUrl" name="trailerUrl"/>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label" for="posterUrl">Poster URL:</label>
+                                    <input class="form-control" type="text" id="posterUrl" name="posterUrl" required/>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label" for="backgroundUrl">Thumb URL:</label>
+                                    <input class="form-control" type="text" id="backgroundUrl" name="backgroundUrl"
+                                           required/>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="isSeries" class="form-label">Danh mục</label>
+                                    <select id="isSeries" th:field="*{isSeries}" class="form-select">
+                                        <option value="" disabled selected>Chọn loại phim</option>
+                                        <option value="true">Phim Bộ</option>
+                                        <option value="false">Phim Lẻ</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="country" class="form-label">Quốc gia:</label>
+                                    <select id="country" name="countryId" class="form-select" required>
+                                        <option value="" disabled selected>Chọn quốc gia</option>
+                                        <option th:each="country : ${allCountries}"
+                                                th:value="${country.countryId}"
+                                                th:text="${country.countryName}"></option>
+                                    </select>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="status" class="form-label">Trạng thái</label>
+                                    <select id="status" name="status" class="form-select" required>
+                                        <option value="Sắp Chiếu" th:selected="${movie.status == 'Sắp Chiếu'}">Sắp chiếu</option>
+                                        <option value="Đang Chiếu" th:selected="${movie.status == 'Đang Chiếu'}">Đang chiếu</option>
+                                        <option value="Hoàn Tất" th:selected="${movie.status == 'Hoàn Tất'}">Hoàn tất</option>
+                                    </select>
+                                </div>
+
+
+
+
+                                <div class="col-md-6">
+                                    <label for="genreSearch" class="form-label">Thể loại:</label>
+
+                                    <!-- Hiển thị thể loại đã chọn -->
+                                    <div id="selectedGenres" class="mb-2"></div>
+
+                                    <!-- Ô tìm kiếm cho thể loại -->
+                                    <input type="text" id="genreSearch" class="form-control mb-2" placeholder="Tìm thể loại...">
+
+                                    <!-- Danh sách checkbox cho thể loại -->
+                                    <div id="genreList" style="max-height: 150px; overflow-y: auto; border: 1px solid #ddd; padding: 10px;">
+                                        <div th:each="genre : ${allGenres}">
+                                            <label class="form-check">
+                                                <input type="checkbox" name="genreIds" th:value="${genre.genreId}" class="form-check-input genre-checkbox">
+                                                <span th:text="${genre.genreName}"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <label for="actorSearch" class="form-label">Diễn viên:</label>
+
+                                    <!-- Hiển thị diễn viên đã chọn -->
+                                    <div id="selectedActors" class="mb-2"></div>
+
+                                    <!-- Ô tìm kiếm cho diễn viên -->
+                                    <input type="text" id="actorSearch" class="form-control mb-2" placeholder="Tìm diễn viên...">
+
+                                    <!-- Danh sách checkbox cho diễn viên -->
+                                    <div id="actorList" style="max-height: 150px; overflow-y: auto; border: 1px solid #ddd; padding: 10px;">
+                                        <div th:each="actor : ${allActors}">
+                                            <label class="form-check">
+                                                <input type="checkbox" name="actorIds" th:value="${actor.actorId}" class="form-check-input actor-checkbox">
+                                                <span th:text="${actor.actorName}"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Thêm Phim</button>
+                                    <a href="/movies" class="btn btn-secondary">Trở về</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Thêm sự kiện lắng nghe cho ô tìm kiếm thể loại
+  // Cập nhật danh sách thể loại đã chọn
+function updateSelectedGenres() {
+    const selectedGenres = [];
+    document.querySelectorAll('.genre-checkbox:checked').forEach((checkbox) => {
+        selectedGenres.push(checkbox.nextElementSibling.textContent);
+    });
+    document.getElementById('selectedGenres').innerHTML = selectedGenres.length > 0 ?
+        'Đã chọn: ' + selectedGenres.join(', ') : 'Chưa chọn thể loại nào';
+}
+
+// Gắn sự kiện cho các checkbox
+document.querySelectorAll('.genre-checkbox').forEach((checkbox) => {
+    checkbox.addEventListener('change', updateSelectedGenres);
+});
+
+// Tìm kiếm thể loại
+document.getElementById('genreSearch').addEventListener('input', function() {
+    const searchValue = this.value.toLowerCase();
+    document.querySelectorAll('.genre-checkbox').forEach((checkbox) => {
+        const label = checkbox.nextElementSibling.textContent.toLowerCase();
+        checkbox.closest('.form-check').style.display = label.includes(searchValue) ? '' : 'none';
+    });
+});
+
+// Cập nhật danh sách ngay từ khi load trang
+updateSelectedGenres();
+
+
+    // Cập nhật danh sách diễn viên đã chọn
+function updateSelectedActors() {
+    const selectedActors = [];
+    document.querySelectorAll('.actor-checkbox:checked').forEach((checkbox) => {
+        selectedActors.push(checkbox.nextElementSibling.textContent);
+    });
+    document.getElementById('selectedActors').innerHTML = selectedActors.length > 0 ?
+        'Đã chọn: ' + selectedActors.join(', ') : 'Chưa chọn diễn viên nào';
+}
+
+// Gắn sự kiện cho các checkbox
+document.querySelectorAll('.actor-checkbox').forEach((checkbox) => {
+    checkbox.addEventListener('change', updateSelectedActors);
+});
+
+// Tìm kiếm diễn viên
+document.getElementById('actorSearch').addEventListener('input', function() {
+    const searchValue = this.value.toLowerCase();
+    document.querySelectorAll('.actor-checkbox').forEach((checkbox) => {
+        const label = checkbox.nextElementSibling.textContent.toLowerCase();
+        checkbox.closest('.form-check').style.display = label.includes(searchValue) ? '' : 'none';
+    });
+});
+
+// Cập nhật danh sách ngay từ khi load trang
+updateSelectedActors();
+
+function getYouTubeEmbedUrl(url) {
+    const youtubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/;
+    const match = url.match(youtubeRegex);
+    return match ? `https://www.youtube.com/embed/${match[1]}` : url;
+}
+
+</script>
+
+<script>
+
+    document.getElementById("fetchApiData").addEventListener("click", function () {
+    const apiUrl = document.getElementById("apiUrl").value;
+
+    if (!apiUrl) {
+        alert("Please enter a valid API URL.");
+        return;
+    }
+
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error fetching data: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const movie = data.movie; // Truy cập vào object movie trong JSON
+
+
+
+
+
+
+            document.getElementById("title").value = movie.name || "";
+            document.getElementById("name").value = movie.origin_name || "";
+            document.getElementById("slug").value = movie.slug || "";
+            document.getElementById("description").value = movie.content || "";
+            const episodeMatch = movie.episode_total?.match(/\d+/);  // Lấy số từ chuỗi "X tập"
+            document.getElementById("totalEpisodes").value = episodeMatch ? parseInt(episodeMatch[0], 10) : "";
+            const statusSelect = document.getElementById("status");
+            const statusMapping = {
+                "trailer": "Sắp Chiếu",
+                "ongoing": "Đang Chiếu",
+                "completed": "Hoàn Tất"
+            };
+
+            // Kiểm tra nếu có giá trị status từ API và thiết lập giá trị mặc định cho select
+            if (movie.status && statusMapping[movie.status]) {
+                // Lấy giá trị hiển thị tương ứng với movie.status
+                statusSelect.value = statusMapping[movie.status];
+            } else {
+                // Nếu không có status hoặc không tìm thấy trong mảng ánh xạ, chọn mặc định là 'Sắp chiếu'
+                statusSelect.value = "Sắp chiếu";
+            }
+            document.getElementById("releaseYear").value = movie.year || "";
+            const directorInput = document.getElementById("director");
+
+            if (Array.isArray(movie.director) && movie.director.length > 0) {
+                // Nếu movie.director là một mảng không rỗng, nối các tên director và điền vào input
+                directorInput.value = movie.director.join(", ");
+            } else {
+                // Nếu không có dữ liệu, tự động điền "Đang cập nhật"
+                directorInput.value = "Đang cập nhật";
+            }
+
+
+            const durationMatch = movie.time?.match(/\d+/);
+            document.getElementById("duration").value = durationMatch ? parseInt(durationMatch[0], 10) : "";
+          const trailerInput = document.getElementById("trailerUrl");
+            if (movie.trailer_url) {
+                // Chuyển đổi URL thành link nhúng nếu là YouTube
+                trailerInput.value = getYouTubeEmbedUrl(movie.trailer_url);
+            } else {
+                // Nếu không có trailer URL, để trống hoặc đặt giá trị mặc định
+                trailerInput.value = "";
+            }
+            document.getElementById("posterUrl").value = movie.thumb_url || "";
+            document.getElementById("backgroundUrl").value = movie.poster_url || "";
+
+
+             if (movie.episode_total === "1") {
+                const isSeriesDropdown = document.getElementById("isSeries"); // Lấy dropdown
+                if (isSeriesDropdown) {
+                    isSeriesDropdown.value = "false"; // Đặt giá trị là 'false' (Phim Chiếu Rạp)
+                }
+            }
+
+        if (movie.category && movie.category.length > 0) {
+        const selectedCategories = movie.category.map(c => c.name); // Mảng các tên thể loại từ API
+
+            if (movie.type === "hoathinh") {
+                // Tìm checkbox có label 'Anime' và đánh dấu là checked
+                const animeCheckbox = Array.from(document.querySelectorAll(".genre-checkbox"))
+                    .find(checkbox => checkbox.nextElementSibling.textContent.trim() === "Hoạt Hình");
+
+                if (animeCheckbox) {
+                    animeCheckbox.checked = true; // Đánh dấu checkbox Anime
+                }
+            }
+         if (movie.type === "tvshows") {
+                // Tìm checkbox có label 'TV Shows' và đánh dấu là checked
+                const tvShowsCheckbox = Array.from(document.querySelectorAll(".genre-checkbox"))
+                    .find(checkbox => checkbox.nextElementSibling.textContent.trim() === "TV Shows");
+
+                if (tvShowsCheckbox) {
+                    tvShowsCheckbox.checked = true; // Đánh dấu checkbox TV Shows
+                }
+            }
+        // Lấy tất cả các checkbox thể loại
+        const genreCheckboxes = document.querySelectorAll(".genre-checkbox");
+
+        // Duyệt qua tất cả checkbox và kiểm tra nếu tên thể loại khớp
+        genreCheckboxes.forEach(checkbox => {
+            const genreName = checkbox.nextElementSibling.textContent.trim(); // Lấy tên thể loại từ label
+            if (selectedCategories.includes(genreName)) {
+                checkbox.checked = true; // Đánh dấu checkbox nếu tên thể loại khớp
+            }
+        });
+
+        updateSelectedGenres();
+    }
+
+
+            if (movie.actor && movie.actor.length > 0) {
+                const selectedActors = movie.actor; // Mảng các tên diễn viên từ API
+
+                // Lấy tất cả các checkbox diễn viên
+                const actorCheckboxes = document.querySelectorAll(".actor-checkbox");
+
+                // Duyệt qua tất cả checkbox và kiểm tra nếu tên diễn viên khớp
+                actorCheckboxes.forEach(checkbox => {
+                    const actorName = checkbox.nextElementSibling.textContent.trim(); // Lấy tên diễn viên từ label
+                    if (selectedActors.includes(actorName)) {
+                        checkbox.checked = true; // Đánh dấu checkbox nếu tên diễn viên khớp
+                    }
+                });
+
+                // Cập nhật lại danh sách diễn viên đã chọn sau khi lấy dữ liệu
+                updateSelectedActors();
+            }
+            if (movie.country && movie.country.length > 0) {
+                const countryName = movie.country[0].name; // Lấy tên quốc gia từ API
+
+                const countrySelect = document.getElementById("country");
+                const countryOptions = Array.from(countrySelect.options); // Lấy tất cả các option trong select
+
+                // Tìm option có giá trị countryName khớp với tên quốc gia
+                const matchedOption = countryOptions.find(option => option.textContent.trim() === countryName);
+
+                if (matchedOption) {
+                    countrySelect.value = matchedOption.value; // Gán giá trị countryId vào select
+                } else {
+                    console.warn(`No matching country found for name: ${countryName}`);
+                }
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Failed to fetch data from the API.");
+        });
+});
+
+</script>
+
+<script src="/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/sidebarmenu.js"></script>
+<script src="/assets/js/app.min.js"></script>
+<script src="/assets/libs/simplebar/dist/simplebar.js"></script>
+</body>
+</html>

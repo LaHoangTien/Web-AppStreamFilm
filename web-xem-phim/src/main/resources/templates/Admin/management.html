@@ -1,0 +1,641 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modernize Free</title>
+    <link rel="shortcut icon" type="image/png" href="/assets/images/logos/favicon.png"/>
+    <link rel="stylesheet" href="/assets/css/styles.min.css"/>
+</head>
+
+<body>
+<!--  Body Wrapper -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div>
+            <div class="brand-logo d-flex align-items-center justify-content-between">
+                <a href="/" class="text-nowrap logo-img">
+                    <img src="/assets/images/logo2.png" width="180" alt="">
+                </a>
+                <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                    <i class="ti ti-x fs-8"></i>
+                </div>
+            </div>
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+                <ul id="sidebarnav">
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu">Home</span>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/admin" aria-expanded="false">
+                <span>
+                  <i class="ti ti-layout-dashboard"></i>
+                </span>
+                            <span class="hide-menu">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu">Thành Phần Quản Lý</span>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/movies" aria-expanded="false">
+                <span>
+                 <i class="ti ti-brand-youtube"></i>
+                </span>
+                            <span class="hide-menu">Danh sách phim</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/genres" aria-expanded="false">
+                <span>
+                 <i class="ti ti-category"></i>
+                </span>
+                            <span class="hide-menu">Danh sách thể loại</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/actors" aria-expanded="false">
+                <span>
+                  <i class="ti ti-user"></i>
+                </span>
+                            <span class="hide-menu">Danh sách diễn viên</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/countries" aria-expanded="false">
+                <span>
+                  <i class="ti ti-world"></i>
+                </span>
+                            <span class="hide-menu">Danh sách Quốc gia</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/users" aria-expanded="false">
+                <span>
+                  <i class="ti ti-users"></i>
+                </span>
+                            <span class="hide-menu">Danh sách người dùng</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/banners" aria-expanded="false">
+                <span>
+                  <i class="ti ti-ad"></i>
+                </span>
+                            <span class="hide-menu">Danh sách quảng cáo</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/api" aria-expanded="false">
+                <span>
+                  <i class="ti ti-list-details"></i>
+                </span>
+                            <span class="hide-menu">API OPhim</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/mv" aria-expanded="false">
+                <span>
+                  <i class="ti ti-list-details"></i>
+                </span>
+                            <span class="hide-menu">API Danh Sách Phim</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="unlimited-access hide-menu bg-light-primary position-relative mb-7 mt-5 rounded">
+                    <div class="d-flex">
+                        <div class="unlimited-access-title me-3">
+                            <h6 class="fw-semibold fs-4 mb-6 text-dark w-85">Upgrade to pro</h6>
+                            <a href="https://adminmart.com/product/modernize-bootstrap-5-admin-template/"
+                               target="_blank" class="btn btn-primary fs-2 fw-semibold lh-sm">Buy Pro</a>
+                        </div>
+                        <div class="unlimited-access-img">
+                            <img src="/assets/images/backgrounds/rocket.png" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+        <!--  Header Start -->
+        <header class="app-header">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <ul class="navbar-nav">
+                    <li class="nav-item d-block d-xl-none">
+                        <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                            <i class="ti ti-menu-2"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-icon-hover" href="javascript:void(0)">
+                            <i class="ti ti-bell-ringing"></i>
+                            <div class="notification bg-primary rounded-circle"></div>
+                        </a>
+                    </li>
+                </ul>
+                <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+                    <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <img th:src="${profileImage != null ? '/profile_images/' + profileImage : '/profile_images/avatardefault.png'}" alt="" width="35" height="35"
+                                     class="rounded-circle">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
+                                 aria-labelledby="drop2">
+                                <div class="message-body">
+                                    <a href="/profile" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <i class="ti ti-user fs-6"></i>
+                                        <p class="mb-0 fs-3">My Profile</p>
+                                    </a>
+<!--                                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">-->
+<!--                                        <i class="ti ti-mail fs-6"></i>-->
+<!--                                        <p class="mb-0 fs-3">My Account</p>-->
+<!--                                    </a>-->
+<!--                                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">-->
+<!--                                        <i class="ti ti-list-check fs-6"></i>-->
+<!--                                        <p class="mb-0 fs-3">My Task</p>-->
+<!--                                    </a>-->
+                                    <a  class="btn btn-outline-primary mx-3 mt-2 d-block" sec:authorize="isAuthenticated()" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        Đăng xuất
+                                    </a>
+                                    <form id="logout-form" th:action="@{/logout}" method="post" style="display: none;">
+                                        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!--  Header End -->
+        <div class="container-fluid">
+
+
+            <!--  Row 1 -->
+            <div class="row">
+                <div class="col-lg-8 d-flex align-items-strech">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+
+                                <h3>Thể loại được xem nhiều</h3>
+                                <!-- Bảng hiển thị các thể loại phim có lượt xem cao nhất -->
+                                <button id="viewAllButton" class="btn btn-primary">Xem Tất Cả</button>
+                            </div>
+
+                            <table class="table text-nowrap mb-0 align-middle">
+                                <thead class="text-dark fs-4">
+                                <tr>
+                                    <th>
+                                        <h6 class="fw-semibold mb-0">Tên thể loại</h6>
+                                    </th>
+                                    <th>
+                                        <h6 class="fw-semibold mb-0">Số lượng phim</h6>
+                                    </th>
+                                    <th>
+                                        <h6 class="fw-semibold mb-0">Tổng lượt xem</h6>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="genre : ${topGenres}">
+                                    <td ><span th:text="${genre.genreName}" class="fw-normal">Tên thể loại</span></td>
+                                    <td ><span th:text="${genre.movieCount}" class="fw-normal">Số lượng phim</span></td>
+                                    <td ><span th:text="${genre.totalViewCount}" class="fw-normal">Tổng lượt xem</span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <!-- Popup hiển thị tất cả thể loại -->
+                            <div id="popup" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border: 1px solid #ccc; z-index: 1000; max-width: 90%; max-height: 80%; overflow: hidden;">
+                                <div class="d-sm-flex d-block align-items-center justify-content-between mb-3">
+                                    <h3>Danh Sách Thể Loại</h3>
+                                    <button id="closePopup" class="btn btn-secondary">Đóng</button>
+                                </div>
+
+                                <!-- Phần chứa bảng có thể cuộn -->
+                                <div style="max-height: 70vh; overflow-y: auto;">
+                                    <table class="table text-nowrap mb-0 align-middle" style="width: 100%; border-collapse: collapse;">
+                                        <thead class="text-dark fs-4" style="position: sticky; top: 0; background-color: white; z-index: 1;">
+                                        <tr>
+                                            <th> <h6 class="fw-semibold mb-0">Tên thể loại</h6></th>
+                                            <th> <h6 class="fw-semibold mb-0">Số lượng phim</h6></th>
+                                            <th> <h6 class="fw-semibold mb-0">Tổng lượt xem</h6></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <!-- Dữ liệu từ các thể loại phim -->
+                                        <tr th:each="genre : ${allGenres}">
+                                            <td ><span th:text="${genre.genreName}" class="fw-normal">Tên thể loại</span></td>
+                                            <td ><span th:text="${genre.movieCount}" class="fw-normal">Số lượng phim</span></td>
+                                            <td ><span th:text="${genre.totalViewCount}" class="fw-normal">Tổng lượt xem</span></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!--                            <div id="chart"></div>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- Yearly Breakup -->
+                            <div class="card overflow-hidden">
+                                <div class="card-body p-4">
+                                    <h5 class="card-title mb-9 fw-semibold">Thống kê phim</h5>
+                                    <div class="row align-items-center">
+                                        <div class="col-8">
+                                            <h4 class="fw-semibold mb-3">Số lượng phim: <span
+                                                    th:text="${totalMovies}"></span>
+                                            </h4>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <span class="round-8 bg-primary rounded-circle me-2 d-inline-block"></span>
+                                                <span class="fs-2">Phim Bộ</span>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+
+                                                <span class="round-8 bg-warning rounded-circle me-2 d-inline-block"></span>
+                                                <span class="fs-2">Phim Chiếu Rạp</span>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-4">
+                                            <div class="d-flex justify-content-center">
+                                                <!-- Biểu đồ tròn sẽ được render vào đây -->
+                                                <div id="breakup"></div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-12">
+                            <!-- User Registrations This Week -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row align-items-start">
+                                        <div class="col-8">
+                                            <h5 class="card-title mb-9 fw-semibold">Thống kê Users</h5>
+                                            <h4 class="fw-semibold mb-3">Tổng Users: <span
+                                                    th:text="${totalUsers}"></span></h4>
+                                            <h5 class="fw-semibold mb-3">Users mới tuần này: <span
+                                                    th:text="${newUsersThisWeek}"></span></h5>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="d-flex justify-content-end">
+                                                <div class="text-white bg-secondary rounded-circle p-6 d-flex align-items-center justify-content-center">
+                                                    <i class="ti ti-users fs-6"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="earning"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 d-flex align-items-stretch">
+                    <div class="card w-100" style="height: 400px">
+                        <div class="card-body p-4">
+                            <div class="mb-4">
+                                <h5 class="card-title fw-semibold">Đánh giá gần đây</h5>
+                                <!-- Tiêu đề cho phần đánh giá -->
+                            </div>
+                            <ul class="timeline-widget mb-0 position-relative mb-n5"
+                                style="max-height: 300px; overflow-y: auto;">
+                                <!-- Lặp qua các đánh giá -->
+                                <li class="timeline-item d-flex position-relative overflow-hidden"
+                                    th:each="rating : ${ratings}">
+                                    <div class="timeline-time text-dark flex-shrink-0 text-end"
+                                         th:text="${#dates.format(rating.createdAt, 'HH:mm / dd-MM-yyyy')}"></div>
+
+                                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                                        <span class="timeline-badge border-2 border-info flex-shrink-0 my-8"></span>
+                                        <!-- Biểu tượng đánh giá -->
+                                        <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                                    </div>
+                                    <div class="timeline-desc fs-3 text-dark mt-n1">
+                                        <strong th:text="${rating.user.fullName}"></strong> đã đánh giá
+                                        <span th:text="${rating.rating}"></span><span style="color: #FFD700;">★</span>
+                                        cho phim
+                                        <a th:href="@{${rating.movie.isSeries} ? '/phimbo/' + ${rating.movie.slug} : '/phimle/' + ${rating.movie.slug}}"
+                                           class="text-primary d-block fw-normal" th:text="${rating.movie.title}"></a>
+                                    </div>
+
+                                </li>
+                                <!-- Thêm các li khác nếu cần -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Phần Bình luận -->
+                <div class="col-lg-6 d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body p-4">
+                            <div class="mb-4">
+                                <h5 class="card-title fw-semibold">Bình luận gần đây</h5>
+                                <!-- Tiêu đề cho phần bình luận -->
+                            </div>
+                            <ul class="timeline-widget mb-0 position-relative mb-n5"
+                                style="max-height: 300px; overflow-y: auto;">
+                                <!-- Lặp qua các bình luận -->
+                                <li class="timeline-item d-flex position-relative overflow-hidden"
+                                    th:each="comment : ${comments}">
+                                    <!-- Hiển thị thời gian tạo bình luận -->
+                                    <div class="timeline-time text-dark flex-shrink-0 text-end"
+                                         th:text="${#dates.format(comment.createdAt, 'HH:mm / dd-MM-yyyy')}"></div>
+
+                                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                                        <span class="timeline-badge border-2 border-info flex-shrink-0 my-8"></span>
+                                        <!-- Biểu tượng bình luận -->
+                                        <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                                    </div>
+                                    <div class="timeline-desc fs-3 text-dark mt-n1">
+                                        <!-- Hiển thị tên người dùng và nội dung bình luận -->
+                                        <strong th:text="${comment.userName}"></strong>
+
+                                        <!-- Nếu parentComment == null -->
+                                        <span th:if="${comment.parentComment == null}">
+                                            Đã bình luận: (<span class="mb-0 fw-normal"
+                                                                 th:text="${comment.commentText}"></span>)
+                                        </span>
+
+                                        <!-- Nếu parentComment != null -->
+                                        <span th:unless="${comment.parentComment == null}">
+                                            Đã trả lời bình luận của <strong
+                                                th:text="${comment.parentComment.userName}"></strong>:
+                                            (<span class="mb-0 fw-normal" th:text="${comment.commentText}"></span>)
+                                        </span> ở phim
+
+                                        <!-- Hiển thị tên phim -->
+                                        <a th:if="${comment.parentComment == null}"
+                                           th:href="@{${comment.movie.isSeries} ? '/phimbo/' + ${comment.movie.slug} + '#comment-' + ${comment.commentId} : '/phimle/' + ${comment.movie.slug} + '#comment-' + ${comment.commentId}}"
+                                           class="mb-0 fw-normal" th:text="${comment.movie.title}"></a>
+
+                                        <!-- Nếu là bình luận con, hiển thị liên kết đến bình luận con -->
+                                        <a th:unless="${comment.parentComment == null}"
+                                           th:href="@{${comment.movie.isSeries} ? '/phimbo/' + ${comment.movie.slug} + '#reply-' + ${comment.commentId} : '/phimle/' + ${comment.movie.slug} + '#reply-' + ${comment.commentId}}"
+                                           class="mb-0 fw-normal" th:text="${comment.movie.title}"></a>
+                                    </div>
+                                </li>
+                                <!-- Thêm các li khác nếu cần -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-5">
+                <div class="row">
+                    <!-- Phần Top 5 Phim Lẻ -->
+                    <div class="col-12 col-md-6 mb-4">
+                        <h4 class="fw-semibold">Top 5 Phim Chiếu Rạp Tuần Này</h4>
+                        <div class="list-group">
+                            <!-- Loop through top5HotMovies -->
+                            <div th:each="movie : ${top5HotMoviesTheater}" class="list-group-item">
+                                <a th:href="${movie.isSeries} ? @{/phimbo/{slug}(slug=${.movie.slug})} : @{/phimle/{slug}(slug=${movie.slug})}"
+                                   class="d-flex align-items-center">
+                                    <img th:src="@{${movie.posterUrl}}" class="me-3" width="50" height="75"
+                                         alt="Poster">
+                                    <div>
+                                        <h5 th:text="${movie.title}"></h5>
+                                        <p style="color: black">
+                                            <i class="ti ti-eye" style="margin-right: 5px;"></i>
+                                            <span th:text="${movie.viewCount}">0</span> lượt xem tổng |
+                                            <span th:text="${movie.weeklyViewCount}">0</span> lượt xem tuần này.
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phần Top 5 Phim Series -->
+                    <div class="col-12 col-md-6 mb-4">
+                        <h4 class="fw-semibold">Top 5 Phim Bộ Tuần Này</h4>
+                        <div class="list-group">
+                            <!-- Loop through top5HotMoviesSeries -->
+                            <div th:each="movie : ${top5HotMoviesSeries}" class="list-group-item">
+                                <a th:href="${movie.isSeries} ? @{/phimbo/{slug}(slug=${movie.slug})} : @{/phimle/{slug}(slug=${movie.slug})}"
+                                   class="d-flex align-items-center">
+                                    <img th:src="@{${movie.posterUrl}}" class="me-3" width="50" height="75"
+                                         alt="Poster">
+                                    <div>
+                                        <h5 th:text="${movie.title}"></h5>
+                                        <p style="color: black">
+                                            <i class="ti ti-eye" style="margin-right: 5px;"></i>
+                                            <span th:text="${movie.viewCount}">0</span> lượt xem tổng |
+                                            <span th:text="${movie.weeklyViewCount}">0</span> lượt xem tuần này.
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h4 class="fw-semibold">Phim được đánh giá cao</h4>
+                <div th:each="movieData : ${moviesWithRatings}" class="col-12 col-md-6 col-lg-4 col-xl-2 mb-4">
+                    <div class="card overflow-hidden rounded-2">
+                        <div class="position-relative">
+                            <a th:href="${movieData.movie.isSeries} ? @{/phimbo/{slug}(slug=${movieData.movie.slug})} : @{/phimle/{slug}(slug=${movieData.movie.slug})}">
+                                <img th:src="@{${movieData.movie.posterUrl}}"
+                                     class="card-img-top rounded-0 fixed-image"
+                                     alt="Poster">
+                            </a>
+                        </div>
+                        <div class="card-body pt-3 p-4">
+                            <h6 th:text="${movieData.movie.title}" class="fw-semibold fs-4 text-truncate"></h6>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div style="display: flex; align-items: center;">
+                                    <span style="color: yellow; margin-right: 5px;font-size: 20px">★</span>
+                                    <!-- Ngôi sao màu vàng -->
+                                    <span th:text="${#numbers.formatDecimal(movieData.averageRating, 1, 1)}">0</span>
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <i class="ti ti-eye" style="margin-right: 5px;"></i>
+                                    <span th:text="${movieData.movie.viewCount}">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-6 px-6 text-center">
+                <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank"
+                                                                class="pe-1 text-primary text-decoration-underline">AdminMart.com</a>
+                    Distributed by <a href="https://themewagon.com">ThemeWagon</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/sidebarmenu.js"></script>
+<script src="/assets/js/app.min.js"></script>
+<script src="/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+<script src="/assets/libs/simplebar/dist/simplebar.js"></script>
+<script src="/assets/js/dashboard.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</body>
+<script th:inline="javascript">
+    $(function () {
+        // Lấy giá trị từ Spring model
+        var seriesCount = /*[[${seriesCount}]]*/ 0;  // Lấy số lượng phim bộ từ backend
+        var cinemaMoviesCount = /*[[${cinemaMoviesCount}]]*/ 0;  // Lấy số lượng phim chiếu rạp từ backend
+
+        // Cấu hình biểu đồ ApexCharts
+        var breakup = {
+            series: [seriesCount, cinemaMoviesCount],  // Dữ liệu từ backend
+            labels: ["Phim Bộ", "Phim Chiếu Rạp"],  // Nhãn cho biểu đồ
+            chart: {
+                width: 180,
+                type: "donut",
+            },
+            // Cập nhật màu sắc cho biểu đồ
+            colors: ["#5D87FF", "#FFD700"],  // Màu sắc cho từng phần (Phim Bộ: xanh, Phim Chiếu Rạp: vàng sáng)
+            plotOptions: {
+                pie: {
+                    donut: {
+                        size: '75%',
+                    }
+                }
+            },
+            dataLabels: {
+                enabled: false,
+            },
+            tooltip: {
+                theme: "dark",
+                fillSeriesColor: false,
+            },
+            legend: {
+                show: false,  // Không hiển thị legend tự động của ApexCharts
+            }
+        };
+
+        // Render biểu đồ vào phần tử có id="breakup"
+        var chart = new ApexCharts(document.querySelector("#breakup"), breakup);
+        chart.render();
+
+        var earning = {
+            chart: {
+                id: "sparkline3",
+                type: "area",
+                height: 60,
+                sparkline: {
+                    enabled: true,
+                },
+                group: "sparklines",
+                fontFamily: "Plus Jakarta Sans', sans-serif",
+                foreColor: "#adb0bb",
+            },
+            series: [{
+                name: "Users mới",
+                color: "#49BEFF",
+                // Chuyển đổi newUsersPerDay từ server (Thymeleaf) thành một chuỗi JavaScript
+                data: /*[[${newUsersPerDay}]]*/ 0 // Điều này sẽ truyền mảng dữ liệu từ controller vào JavaScript
+            }],
+            stroke: {
+                curve: "smooth",
+                width: 2,
+            },
+            fill: {
+                colors: ["#f3feff"],
+                type: "solid",
+                opacity: 0.05,
+            },
+            markers: {
+                size: 0,
+            },
+            tooltip: {
+                theme: "dark",
+                fixed: {
+                    enabled: true,
+                    position: "right",
+                },
+                x: {
+                    show: false,
+                },
+            },
+        };
+
+        new ApexCharts(document.querySelector("#earning"), earning).render();
+    })
+</script>
+
+<style>
+    #popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border: 1px solid #ccc;
+        z-index: 1000;
+        max-width: 90%;
+        max-height: 80%;
+        overflow-y: auto;
+    }
+    .fixed-image {
+    width: 175px; /* Đặt chiều rộng cố định */
+    height: 275px; /* Đặt chiều cao cố định */
+    object-fit: cover; /* Tự động cắt hoặc co giãn hình ảnh */
+    object-position: center; /* Căn giữa hình ảnh nếu bị cắt */
+    border-radius: 5px; /* Tùy chọn bo góc */
+}
+</style>
+
+<!-- JavaScript để mở và đóng popup -->
+<script>
+    // Khi nhấn nút "Xem Tất Cả", hiển thị popup
+    document.getElementById('viewAllButton').addEventListener('click', function() {
+        // Sắp xếp danh sách thể loại theo tổng lượt xem từ cao nhất đến thấp nhất
+        const allGenres = [...document.querySelectorAll("#popup tbody tr")];
+        allGenres.sort((a, b) => {
+            const viewsA = parseInt(a.querySelectorAll("td")[2].textContent);
+            const viewsB = parseInt(b.querySelectorAll("td")[2].textContent);
+            return viewsB - viewsA; // Sắp xếp theo thứ tự giảm dần
+        });
+
+        // Sau khi sắp xếp, append lại vào tbody
+        const tbody = document.querySelector("#popup tbody");
+        allGenres.forEach(row => tbody.appendChild(row));
+
+        // Hiển thị popup
+        document.getElementById('popup').style.display = 'block';
+    });
+
+    // Khi nhấn nút "Đóng", ẩn popup
+    document.getElementById('closePopup').addEventListener('click', function() {
+        document.getElementById('popup').style.display = 'none';
+    });
+</script>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modernize Free</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png"/>
+    <link rel="stylesheet" href="/assets/css/styles.min.css"/>
+</head>
+
+<body>
+<!--  Body Wrapper -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+    <div>
+        <th:block th:replace="Admin/management::aside"></th:block>
+    </div>
+    <div class="body-wrapper">
+        <div>
+            <th:block th:replace="Admin/management::header"></th:block>
+        </div>
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container mt-5">
+                            <h1 class="mb-4" th:text="${episode.title}"></h1>
+
+
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <p><strong>Episode Number:</strong> <span th:text="${episode.episodeNumber}"></span>
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p><strong>Trạng thái:</strong> <span th:text="${episode.movie.status}"></span></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p><strong>Tổng số tập:</strong> <span
+                                            th:text="${episode.movie.totalEpisodes}"></span></p>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <p><strong>Movie Title:</strong> <span th:text="${episode.movie.title}"></span></p>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <iframe th:src="@{${episode.videoUrl}}"
+                                        type="video/mp4" height="590" width="100%" controls>>
+
+                                    Your browser does not support the video tag.
+                                    <p>Video not available.</p>
+                                </iframe>
+                            </div>
+
+                            <div>
+                                <a th:href="@{/episodes/edit/{id}(id=${episode.episodeId})}" class="btn btn-primary">Edit
+                                    Episode</a>
+                                <a th:href="@{/movies}" class="btn btn-secondary">Back to Movie List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/sidebarmenu.js"></script>
+<script src="/assets/js/app.min.js"></script>
+<script src="/assets/libs/simplebar/dist/simplebar.js"></script>
+</body>
+</html>
