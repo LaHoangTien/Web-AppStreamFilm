@@ -4,9 +4,7 @@ Dự án cá nhân xây dựng hệ thống xem phim trực tuyến hoàn chỉn
 
 ---
 
-## 📁 Cấu trúc dự án (Monorepo)
-
-Dự án được tổ chức theo mô hình **Monorepo** giúp dễ dàng quản lý toàn bộ mã nguồn của hệ thống trong một kho lưu trữ duy nhất:
+## 📁 Cấu trúc dự án
 
 *   **`web-xem-phim/`**: Bao gồm mã nguồn Backend (Java Spring Boot) xử lý toàn bộ logic nghiệp vụ, cơ sở dữ liệu, API, và đồng thời chứa giao diện Web Front-End (dành cho cả người dùng xem phim trực tuyến và quản trị viên quản lý hệ thống).
 *   **`app-xem-phim/`**: Mã nguồn ứng dụng di động (Android Client) giao tiếp với Backend qua RESTful API để phục vụ người dùng xem phim trực tiếp trên điện thoại.
