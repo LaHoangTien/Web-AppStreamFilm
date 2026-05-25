@@ -26,3 +26,19 @@ Dự án cá nhân xây dựng hệ thống xem phim trực tuyến hoàn chỉn
 *   **Xác thực bảo mật:** Đăng ký, đăng nhập hệ thống, khôi phục mật khẩu qua Gmail OTP, và đăng nhập nhanh bằng tài khoản Google/Facebook.
 *   **Tích hợp luồng phim (Third-party Streaming):** Hệ thống tối ưu hóa việc gọi API từ dịch vụ bên thứ ba để lấy luồng phát (Stream URL). Quản trị viên chỉ cần chọn phim, hệ thống sẽ tự động lưu thông tin cấu hình vào cơ sở dữ liệu MySQL và nhúng (embed) luồng phát trực tiếp lên giao diện người dùng mà không cần lưu trữ file video gốc, giúp tiết kiệm tài nguyên băng thông.
 *   **Tìm kiếm thông minh:** Tích hợp Elasticsearch giúp tìm kiếm tên phim, thể loại, diễn viên ngay lập tức với cơ chế tìm kiếm mờ (Fuzzy Search).
+*   
+## 🛠️ Công nghệ sử dụng
+
+### Backend
+* **Java Spring Boot** 
+* **Spring Data JPA** 
+* **MySQL** 
+* **Elasticsearch** 
+* **spring security + JWT**
+
+### Frontend
+* **HTML5/CSS3/JavaScript**
+
+### Mobile
+* **Android/flutter**
+* **RESTful API**
